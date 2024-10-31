@@ -3,7 +3,7 @@ import styles from '../page.module.css';
 import dynamic from 'next/dynamic';
 import React, { useState, useEffect } from 'react';
 import Header from '../Header';
-import Mac from '../../components/Computer';
+import Mac from '../../components/computer/Index';
 
 export default function About() {
     const [showCursor, setShowCursor] = useState(true);
