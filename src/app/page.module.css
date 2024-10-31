@@ -1,0 +1,594 @@
+/* Font imports */
+@font-face {
+    font-family: 'Rajdhani';
+    src: url('/fonts/Rajdhani/Rajdhani-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Neue';
+    src: url('/fonts/neue-haas-grotesk-display-pro-cufonfonts/NeueHaasDisplayLight.ttf') format('truetype');
+}
+
+/* Base styling */
+.body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgb(226, 226, 226);
+}
+
+/* Smooth fade-in for page loads */
+.fade-in {
+    opacity: 0;
+    animation: fadeInAnimation 0.6s ease forwards;
+}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Header and navigation styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: rgb(226, 226, 226);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.logoMain {
+    font-size: 25px;
+    text-decoration: none; /* Remove underline */
+    color: inherit;
+    cursor: pointer;
+}
+
+.nav {
+    display: flex; /* Ensures inline display for nav items */
+    gap: 30px; /* Space between items */
+}
+
+.menuItem {
+    font-size: 20px;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease; /* Smooth transition for text color */
+}
+
+.menuItem::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.menuItem:hover {
+    color: #7f7f7f; /* Hover text color */
+    cursor: pointer;
+}
+
+.menuItem:hover::after {
+    width: 100%; /* Expands underline on hover */
+    background-color: #7f7f7f;
+}
+
+/* Main container for content sections */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0px; /* Adjust this to be the same as the height of the header */
+}
+
+.contentWrapper {
+    padding: 0px;
+    width: 100vw;
+    height: 600px;
+    box-sizing: border-box;
+    z-index: 1; /* Ensure it stays below the header */
+}
+
+/* page.module.css */
+
+
+.scene {
+    height: 600px;
+    width: 100vw;
+}
+
+.aboutContainer {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 110px);
+    overflow: hidden; /* Prevents overflow from large 3D scene */
+}
+
+/* About section */
+.aboutSection {
+    position: absolute;
+    top: 0%; /* Adjust as needed to align vertically */
+    left: 50%; /* Shift it towards the right */
+    width: 40%; /* Adjust the width if needed */
+    padding: 0px;
+    font-family: 'Rajdhani', sans-serif;
+    color: #333;
+    text-align: left;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.modelOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+.aboutMe {
+    font-size: 2rem;
+    color: #111;
+    margin-bottom: 15px;
+    z-index: 1;
+    text-align: left;
+}
+
+.aboutText {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+    margin-top: 0;
+    z-index: 2;
+}
+
+.macModel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh); /* Ensures it fills the container */
+    z-index: 1;
+}
+
+/* 3D scene container */
+.sceneContainer {
+    width: 70%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Video section */
+.video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgb(226, 226, 226);
+}
+
+.video video {
+    width: 100%;
+    margin: 50px auto;
+}
+
+/* CV container */
+.cvContainer {
+    padding: 20px;
+    max-width: 800px;
+    font-family: 'Rajdhani', sans-serif;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+.infoItem {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.infoItem a {
+    text-decoration: none;
+    color: #555;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.topSection {
+    display: flex;
+    gap: 100px;
+    margin-bottom: 30px;
+}
+
+.profilePicture {
+    border-radius: 50%;
+}
+
+.h1, .h2 {
+    font-family: 'Rajdhani', sans-serif;
+    text-align: center;
+    color: #333;
+    margin: 0;
+}
+
+.h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.h2 {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.details p {
+    margin: 0;
+    color: #777;
+}
+
+/* Section styling with smooth transitions */
+.section {
+    padding: 20px 0;
+    border-top: 1px solid #adabab;
+    position: relative;
+}
+
+.listItem {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    height: 50px;
+    border-radius: 50%;
+}
+
+.section:first-child {
+    border-top: none;
+}
+
+.section h3 {
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s ease-in-out;
+
+}
+
+.section h3:hover {
+    color: #a1a1a1;
+
+}
+
+/* Section content with smooth expand/collapse */
+.section-content {
+    max-height: 0;
+    padding-left: 5px;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.6s ease, opacity 0.6s ease;
+}
+
+.section-content.expanded {
+    max-height: 1000px; /* Large enough to fit content */
+    opacity: 1;
+}
+
+/* Download button styling */
+.downloadButton {
+    text-align: center;
+    padding-top: 50px;
+    margin-bottom: 30px;
+    border-top: 1px solid #aeaeae;
+}
+
+.downloadButton a {
+    padding: 8px 16px;
+    color: #000000;
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: background-color 0.5s ease;
+}
+
+.downloadButton a:hover {
+    background-color: #d7d7d7;
+}
+
+/* Arrow styling with smooth rotation */
+.arrow {
+    width: 15px; /* Adjust icon size */
+    height: 15px;
+    margin-left: 8px;
+    transform: rotate(90deg);
+    transition: transform 0.5s ease; /* Smooth rotation */
+}
+
+.arrow.expanded {
+    transform: rotate(270deg); /* Rotate arrow 180 degrees when expanded */
+}
+
+/* Other CSS for sections remains the same */
+.section h3 {
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s ease-in-out;
+}
+
+.timeline {
+    position: relative;
+    padding: 30px 0; /* Space for the timeline */
+}
+
+.timelineItem {
+    display: flex;
+    align-items: flex-start; /* Align items to the start (top) */
+    position: relative; /* Position relative for the line */
+    margin-bottom: 20px; /* Space between items */
+}
+
+.timelineItem:not(:last-child):after {
+    content: '';
+    position: absolute;
+    left: 24px; /* Position the line */
+    top: 30px; /* Start from the top */
+    bottom: -50px; /* Extend to the bottom */
+    width: 1px; /* Width of the line */
+    background-color: #adabab; /* Line color */
+}
+
+.logoContainer {
+    position: relative; /* Position relative for the logo */
+    z-index: 1; /* Ensure logo is above the line */
+}
+
+.experienceDetails {
+    font-family: 'Montserrat';
+    color: #434343;
+    font-size: 14px;
+    margin-left: 20px; /* Space between logo and text */
+    display: flex; /* Enable flex layout */
+    flex-direction: column; /* Stack title and description */
+    justify-content: center; /* Center content vertically */
+}
+
+.skillsDetails {
+    font-family: 'Montserrat';
+    font-size: 13px;
+}
+
+.experienceTitle {
+    color: black;
+    font-family: 'Rajdhani';
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+    z-index: 2;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+.myProjects {
+    font-family: 'Rajdhani';
+}
+
+
+.projects {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to new rows */
+    gap: 20px;
+    justify-content: center;
+}
+
+.projectContainer {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto; /* Centers the container */
+    width: 100%;
+}
+
+
+.cardWrapper {
+    flex: 1 1 45%; /* Adjusts the width of each card to take about 45% of the container */
+    max-width: 40vw; /* Restricts each card to a maximum of 45% on large screens */
+    min-width: 300px; /* Ensures each card has a minimum width */
+    box-sizing: border-box;
+}
+
+/* Background card layer with gradient */
+.backgroundCard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.3), rgba(148, 0, 188, 0.3));
+    z-index: 1;
+}
+
+/* Main card with frosted glass effect */
+.cardContainer {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px); /* Frosted blur effect */
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 2; /* Above the background layer */
+    color: #333; /* Ensure text is visible */
+}
+
+
+
+.projectImage {
+    height: 300px;
+    border-radius: 20px;
+}
+
+.seeProject {
+    border: 1px solid black;
+    font-family: 'Rajdhani';
+    padding: 8px 12px;
+    background-color: #f5f5f5;
+    display: inline-flex; /* Aligns items inline */
+    align-items: center; /* Vertically centers text and image */
+    gap: 8px; /* Space between text and image */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    text-decoration: none; /* Removes underline from the link */
+    color: inherit; /* Keeps the text color inherited */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    margin: 0 auto; /* Centers the button horizontally */
+    margin-top: 20px;
+}
+
+.seeProject:hover {
+    background-color: #e6e6e6;
+    transition: background-color 0.5s;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.content {
+    padding: 20px;
+}
+
+.title {
+    font-family: 'Rajdhani';
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.description {
+    font-family: 'Montserrat';
+    text-align: justify ;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.projectsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .projectsContainer {
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1024px) {
+    .projectsContainer {
+        gap: 20px;
+    }
+}
+
+/* Container for the whole stack */
+/* Container for the whole stack */
+.stack {
+    display: inline-flex;
+    gap: 10px;
+}
+
+/* Individual item in the stack */
+.stackItem {
+    font-family: 'Courier New', Courier, monospace;
+    display: inline-flex; /* Ensures icon and text are aligned horizontally */
+    align-items: center; /* Vertically centers the icon with the text */
+    position: relative; /* For positioning the bullet */
+    gap: 5px;
+}
+
+/* Add bullet point before each stack item except the first */
+.stackItem:not(:first-child)::before {
+    content: '•'; /* The bullet point */
+    color: #555; /* Bullet color */
+    margin-right: 8px; /* Space between bullet and logo */
+    font-size: 1rem; /* Bullet size */
+}
+
+/* Style for the logo icon */
+.logoStack {
+    width: 20px;
+    height: 20px;
+}
