@@ -11,7 +11,7 @@ import { Html, Head, Main, NextScript } from 'next/document';
 
 
 
-const Scene = dynamic(() => import('@/components/Scene'), { ssr: false });
+const Scene = dynamic(() => import('../components/Scene'), { ssr: false });
 
 export default function Home() {
   const [activePage, setActivePage] = useState('home');

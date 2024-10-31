@@ -7,11 +7,7 @@ import styles from './Mac.module.css'
 
 export default function Index() {
 
-    const [isLoaded, setIsLoaded] = useState(false);
-
-
   return (
-    <div className={`${styles.canvasContainer} ${isLoaded ? styles.loaded : ''}`}>
     <Canvas
       style={{ background: 'transparent' }}
       camera={{ position: [4, 3, 12],
@@ -35,6 +31,5 @@ export default function Index() {
       
       {/* Environment Background */}
     </Canvas>
-    </div>
   );
 }
