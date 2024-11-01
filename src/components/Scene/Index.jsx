@@ -1,6 +1,6 @@
 'use client';
 import { Canvas } from '@react-three/fiber';
-import ModelAnimated from './ModelAnimated';
+import ModelAnimated from './ModelAnimated.js';
 import { Environment } from '@react-three/drei';
 import * as THREE from 'three';
 
