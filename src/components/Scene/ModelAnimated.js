@@ -1,9 +1,11 @@
+// Import dependencies
 import React, { useRef, useEffect, useMemo, useState } from 'react';
 import { MeshTransmissionMaterial, useGLTF, Text } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useSpring, animated, easings } from '@react-spring/three';
 import * as THREE from 'three';
 
+// Custom hook to detect screen size
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
 
@@ -23,12 +25,12 @@ export default function Model() {
   const { viewport } = useThree();
   const torus = useRef();
   const materialRef = useRef();
-  const isMobile = useMediaQuery('(max-width: 768px)'); // Adjust width as needed
+  const isMobile = useMediaQuery('(max-width: 768px)'); // Detect mobile screens
 
-  // Initial spring setup
+  // Animation properties with spring
   const [springProps, setSpring] = useSpring(() => ({
     rotationSpeed: 0.01,
-    thickness: isMobile ? 0 : 0.08, // Initial thickness based on mobile/desktop
+    thickness: isMobile ? 0 : 0.08,
     direction: 1,
     scale: [0.7, 0.7, 0.7],
     config: {
@@ -39,22 +41,21 @@ export default function Model() {
     },
   }));
 
-  // Hover effect
+  // Hover effect (desktop)
   const handleHoverStart = () => {
     setSpring({ rotationSpeed: 0.02, thickness: isMobile ? 0.2 : 0.2, scale: [0.9, 0.9, 0.9] });
   };
-
   const handleHoverEnd = () => {
     setSpring({ rotationSpeed: 0.007, thickness: isMobile ? 0 : 0.08, scale: [0.8, 0.8, 0.8] });
   };
 
-  // Click effect for mobile to animate thickness change
-  const handleClick = () => {
-    setSpring({ scale: [1.2, 1.2, 1.2], thickness: 0.5  });
+  // Touch effect (mobile)
+  const handleTouch = () => {
+    setSpring({ scale: [1.2, 1.2, 1.2], thickness: 0.5 });
     setTimeout(() => setSpring({ scale: [0.7, 0.7, 0.7], thickness: isMobile ? 0 : 0.08 }), 1500);
   };
 
-  // Apply rotation and thickness from springProps
+  // Apply rotation and thickness
   useFrame(() => {
     if (torus.current) {
       torus.current.rotation.y += springProps.rotationSpeed.get() * springProps.direction.get();
@@ -75,69 +76,29 @@ export default function Model() {
           <meshBasicMaterial color="white" />
         </mesh>
 
-        <Text
-          font={'Helvetica'}
-          position={isMobile ? [-0.45, -0.4, -1] : [0, -0.4, -1]}
-          fontSize={isMobile ? 0.2 : 0.15}
-          color="black"
-          anchorX="center"
-          anchorY="middle"
-          renderOrder={1}
-        >
+        <Text font={'Helvetica'} position={isMobile ? [-0.45, -0.4, -1] : [0, -0.4, -1]} fontSize={isMobile ? 0.2 : 0.15} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
           Software Engineer
         </Text>
-        <Text
-          font={'Helvetica'}
-          position={isMobile ? [-0.87, -0.65, -1] : [0, -0.6, -1]} // Adjust position for mobile
-          fontSize={isMobile ? 0.2 : 0.15}
-          color="black"
-          anchorX="center"
-          anchorY="middle"
-          renderOrder={1}
-        >
+        <Text font={'Helvetica'} position={isMobile ? [-0.87, -0.65, -1] : [0, -0.6, -1]} fontSize={isMobile ? 0.2 : 0.15} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
           3D Artist
         </Text>
 
         {isMobile ? (
           <>
-            <Text
-              font={'Helvetica'}
-              position={[-0.5, 0.6, -1]}
-              fontSize={0.6}
-              color="black"
-              anchorX="center"
-              anchorY="middle"
-              renderOrder={1}
-            >
+            <Text font={'Helvetica'} position={[-0.5, 0.6, -1]} fontSize={0.6} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
               Julien
             </Text>
-            <Text
-              font={'Helvetica'}
-              position={[0, 0, -1]}
-              fontSize={0.6}
-              color="black"
-              anchorX="center"
-              anchorY="middle"
-              renderOrder={1}
-            >
+            <Text font={'Helvetica'} position={[0, 0, -1]} fontSize={0.6} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
               Cardeillac
             </Text>
           </>
         ) : (
-          <Text
-            font={'Helvetica'}
-            position={[0, 0, -1]}
-            fontSize={0.6}
-            color="black"
-            anchorX="center"
-            anchorY="middle"
-            renderOrder={1}
-          >
+          <Text font={'Helvetica'} position={[0, 0, -1]} fontSize={0.6} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
             Julien Cardeillac
           </Text>
         )}
 
-        {/* 3D object with hover effect */}
+        {/* 3D object with hover and touch effect */}
         <animated.mesh
           ref={torus}
           geometry={nodes.Sphere.geometry}
@@ -145,9 +106,9 @@ export default function Model() {
           renderOrder={2}
           scale={springProps.scale}
           position={isMobile ? [0.2, 0, 0] : [0, 0, 0]}
-          onPointerOver={handleHoverStart}
-          onPointerOut={handleHoverEnd}
-          onClick={handleClick}
+          onPointerOver={!isMobile ? handleHoverStart : undefined} // Only apply hover on desktop
+          onPointerOut={!isMobile ? handleHoverEnd : undefined}
+          onTouchStart={isMobile ? handleTouch : undefined} // Only apply touch on mobile
         >
           <MeshTransmissionMaterial
             ref={materialRef}

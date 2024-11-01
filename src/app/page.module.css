@@ -107,7 +107,7 @@
 
 
 .scene {
-    height: calc(100vh - 110px);
+    height: calc(100vh - 100px);
     width: 100vw;
 }
 
@@ -594,9 +594,23 @@
 .projectsContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
     justify-content: center;
     padding: 20px;
+}
+
+.webProjects {
+    font-family: 'Rajdhani';
+    font-size: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-bottom: 15px;
+    border-bottom: 1.5px solid rgb(54, 54, 54);
+}
+
+.projectPageContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 @media (min-width: 768px) {

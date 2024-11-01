@@ -27,8 +27,8 @@ export default function Mac() {
 
   const handleMovement = (xFactor, yFactor) => {
     setRotation({
-      x: yFactor * 0.05,
-      y: xFactor * 0.05,
+      x: yFactor * (isMobile ? 0.1 : 0.05),  // Increase sensitivity for mobile
+      y: xFactor * (isMobile ? 0.1 : 0.05),
     });
   };
 

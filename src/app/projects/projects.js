@@ -2,8 +2,20 @@
 import React from 'react';
 import Card from './card';
 import styles from '../page.module.css';
+import { useState, useEffect } from 'react';
 
 export default function Projects() {
+    const [showCursor, setShowCursor] = useState(true);
+
+    // Toggle cursor visibility every 500ms
+    useEffect(() => {
+        const cursorInterval = setInterval(() => {
+            setShowCursor(prev => !prev);
+        }, 500); // Adjust time for faster or slower blinking
+
+        return () => clearInterval(cursorInterval);
+    }, []);
+
     const projects = [
         {
             title: 'Space Invaders',
@@ -27,6 +39,8 @@ export default function Projects() {
     ];
 
     return (
+        <div className={styles.projectPageContainer}>
+        <h2 className={styles.webProjects}>Web Projects<span className={styles.cursor}>{showCursor ? "_" : ""}</span></h2>
         <div className={styles.projectsContainer}>
             {projects.map((project, index) => (
                 <Card
@@ -38,6 +52,7 @@ export default function Projects() {
                     stack={(project.stack || [])} // Ensure stack is an array before joining
                 />
             ))}
+        </div>
         </div>
     );
 }

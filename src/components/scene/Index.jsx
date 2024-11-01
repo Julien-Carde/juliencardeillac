@@ -3,8 +3,22 @@ import { Canvas } from '@react-three/fiber';
 import ModelAnimated from './ModelAnimated.js';
 import { Environment } from '@react-three/drei';
 import * as THREE from 'three';
+import { useEffect } from 'react';
+
+
 
 export default function Index() {
+
+  useEffect(() => {
+    // Prevent scrolling
+    document.body.style.overflow = 'hidden';
+
+    // Reset overflow when component unmounts
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+  
   return (
     <Canvas
       style={{ background: 'transparent' }}
