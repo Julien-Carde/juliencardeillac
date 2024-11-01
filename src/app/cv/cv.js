@@ -1,10 +1,27 @@
 'use client';
 import styles from '../page.module.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../Header';
+
+function useMediaQuery(query) {
+    const [matches, setMatches] = useState(false);
+  
+    useEffect(() => {
+      const mediaQuery = window.matchMedia(query);
+      setMatches(mediaQuery.matches);
+      const handler = (event) => setMatches(event.matches);
+      mediaQuery.addEventListener('change', handler);
+      return () => mediaQuery.removeEventListener('change', handler);
+    }, [query]);
+  
+    return matches;
+  }
+
 
 export default function Cv() {
     const [expandedSection, setExpandedSection] = useState(null);
+    const isMobile = useMediaQuery('(max-width: 768px)');
+
 
     const toggleSection = (section) => {
         setExpandedSection(expandedSection === section ? null : section);
@@ -16,7 +33,7 @@ export default function Cv() {
                 <div className={styles.topSection}>
                     <img className={styles.profilePicture}
                         src='https://scontent-cdg4-2.xx.fbcdn.net/v/t39.30808-6/433866295_3546952942184311_1566275548053013904_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=rML0zZNib9IQ7kNvgGfSPjE&_nc_zt=23&_nc_ht=scontent-cdg4-2.xx&_nc_gid=AyvV09vzbXyCTtLSvY7pmqt&oh=00_AYDLl178pRuwi9O97lRWbwni6iK4jrTLi7RDJEcfVwdm3w&oe=6727234B'
-                        height='200px'
+                        height= '200px'
                     />
                     <div className={styles.details}>
                         <h1>Julien Cardeillac</h1>

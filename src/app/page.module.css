@@ -122,6 +122,10 @@
         overflow: hidden; /* Prevents horizontal scrolling */
         padding: 10px; /* Optional: adds padding for spacing */
     }
+
+    .aboutText {
+        font-size: 0.5rem;
+    }
 }
 
 
@@ -135,7 +139,7 @@
 /* About section */
 .aboutSection {
     position: absolute;
-    top: 0%; /* Adjust as needed to align vertically */
+    top: -2%; /* Adjust as needed to align vertically */
     left: 50%; /* Shift it towards the right */
     width: 40%; /* Adjust the width if needed */
     padding: 0px;
@@ -174,6 +178,27 @@
     text-align: justify;
     margin-top: 0;
     z-index: 2;
+}
+
+@media (max-width: 768px) {
+
+    .aboutText {
+        font-size: 0.8rem;
+    }
+
+    .aboutSection {
+        left: 38%; /* Shift it towards the right */
+        width: 55%; /* Adjust the width if needed */
+    }
+
+    
+}
+
+@media (max-width: 1200px) {
+
+    .optionalText {
+        opacity: 0;
+    }
 }
 
 .macModel {
@@ -240,6 +265,15 @@
     display: flex;
     gap: 100px;
     margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .topSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center-align for mobile */
+        gap: 20px;
+    }
 }
 
 .profilePicture {

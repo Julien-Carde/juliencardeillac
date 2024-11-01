@@ -31,8 +31,8 @@ export default function About() {
                         My work blends engineering principles with visual design to bring immersive projects to life.
                         <br />
                         <br />
-                        Whether working on 3D modeling, animation, or full-stack applications, I’m committed to pushing the boundaries of what’s possible, always striving to make each project more intuitive and impactful.
-                        Welcome to my portfolio, where I share my journey through code, creativity, and continuous learning.
+                        <p className={styles.optionalText}>Whether working on 3D modeling, animation, or full-stack applications, I’m committed to pushing the boundaries of what’s possible, always striving to make each project more intuitive and impactful.
+                        Welcome to my portfolio, where I share my journey through code, creativity, and continuous learning.</p>
                     </p>
                 </div>
                 {/* Mac 3D Scene */}

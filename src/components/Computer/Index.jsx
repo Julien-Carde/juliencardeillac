@@ -2,11 +2,29 @@
 import { Canvas } from '@react-three/fiber';
 import { Environment, Lightformer } from '@react-three/drei';
 import { EffectComposer, Bloom, DepthOfField, FXAA, ToneMapping, GammaCorrection } from '@react-three/postprocessing';
+import { useState, useEffect } from 'react';
 import * as THREE from 'three';
 import Mac from './Mac.js';
 import styles from './Mac.module.css';
 
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(query);
+    setMatches(mediaQuery.matches);
+    const handler = (event) => setMatches(event.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, [query]);
+
+  return matches;
+}
+
 export default function Index() {
+
+  const isMobile = useMediaQuery('(max-width: 768px)'); // Adjust width as needed
+
 
   return (
     <Canvas
@@ -18,7 +36,7 @@ export default function Index() {
       }}
       style={{ background: 'transparent' }}
       camera={{
-        position: [4, 3, 12],
+        position: isMobile ? [2, 3, 15] : [4, 3, 12],
         fov: 50,
         rotation: [0, 0, 0]
       }}
