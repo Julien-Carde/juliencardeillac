@@ -107,9 +107,23 @@
 
 
 .scene {
-    height: 600px;
+    height: calc(100vh - 110px);
     width: 100vw;
 }
+
+@media (max-width: 768px) {
+    .scene {
+        display: flex;
+        justify-content: center; /* Centers horizontally */
+        align-items: center; /* Centers vertically */
+        height: calc(100vh - 200px);
+        width: 280vw; /* Keeps width within viewport */
+        transform: translate(-33%);
+        overflow: hidden; /* Prevents horizontal scrolling */
+        padding: 10px; /* Optional: adds padding for spacing */
+    }
+}
+
 
 .aboutContainer {
     position: relative;

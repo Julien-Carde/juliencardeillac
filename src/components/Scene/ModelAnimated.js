@@ -1,49 +1,62 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useMemo, useState } from 'react';
 import { MeshTransmissionMaterial, useGLTF, Text } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useSpring, animated, easings } from '@react-spring/three';
 import * as THREE from 'three';
+
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(query);
+    setMatches(mediaQuery.matches);
+    const handler = (event) => setMatches(event.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, [query]);
+
+  return matches;
+}
 
 export default function Model() {
   const { nodes } = useGLTF('/medias/AbstractBall.glb');
   const { viewport } = useThree();
   const torus = useRef();
   const materialRef = useRef();
+  const isMobile = useMediaQuery('(max-width: 768px)'); // Adjust width as needed
 
-  // Animated spring properties with custom easing
+  // Initial spring setup
   const [springProps, setSpring] = useSpring(() => ({
     rotationSpeed: 0.01,
-    thickness: 0.07,
-    direction: 1, // 1 for normal rotation, -1 for reversed rotation
+    thickness: isMobile ? 0 : 0.08, // Initial thickness based on mobile/desktop
+    direction: 1,
     scale: [0.7, 0.7, 0.7],
     config: {
-      mass: 2,
+      mass: 6,
       tension: 50,
-      friction: 80,
-      easing: easings.easeInOutSine, // Apply custom easing
+      friction: 100,
+      easing: easings.easeInOutSine,
     },
   }));
 
-  // Handle mouse hover to change rotation speed, thickness, and direction
+  // Hover effect
   const handleHoverStart = () => {
-    setSpring({ rotationSpeed: 0.02, thickness: 0.2, direction: 1, scale: [0.9, 0.9, 0.9] });
+    setSpring({ rotationSpeed: 0.02, thickness: isMobile ? 0.2 : 0.2, scale: [0.9, 0.9, 0.9] });
   };
 
   const handleHoverEnd = () => {
-    setSpring({ rotationSpeed: 0.007, thickness: 0.08, direction: 1, scale: [0.8, 0.8, 0.8] });
+    setSpring({ rotationSpeed: 0.007, thickness: isMobile ? 0 : 0.08, scale: [0.8, 0.8, 0.8] });
   };
 
+  // Click effect for mobile to animate thickness change
   const handleClick = () => {
-    setSpring({ scale: [1.2, 1.2, 1.2], thickness: 0.2 }); // Expand on tap
-    setTimeout(() => {
-      setSpring({ scale: [0.7, 0.7, 0.7], thickness: 0.08 }); // Shrink back after 300ms
-    }, 1000);
+    setSpring({ scale: [1.2, 1.2, 1.2], thickness: 0.5  });
+    setTimeout(() => setSpring({ scale: [0.7, 0.7, 0.7], thickness: isMobile ? 0 : 0.08 }), 1500);
   };
 
-  // Apply animation properties on each frame
+  // Apply rotation and thickness from springProps
   useFrame(() => {
     if (torus.current) {
-      // Apply animated rotation speed and direction
       torus.current.rotation.y += springProps.rotationSpeed.get() * springProps.direction.get();
     }
     if (materialRef.current) {
@@ -64,8 +77,8 @@ export default function Model() {
 
         <Text
           font={'Helvetica'}
-          position={[0, -0.4, -1]}
-          fontSize={0.15}
+          position={isMobile ? [-0.45, -0.4, -1] : [0, -0.4, -1]}
+          fontSize={isMobile ? 0.2 : 0.15}
           color="black"
           anchorX="center"
           anchorY="middle"
@@ -75,8 +88,8 @@ export default function Model() {
         </Text>
         <Text
           font={'Helvetica'}
-          position={[0, -0.6, -1]}
-          fontSize={0.15}
+          position={isMobile ? [-0.87, -0.65, -1] : [0, -0.6, -1]} // Adjust position for mobile
+          fontSize={isMobile ? 0.2 : 0.15}
           color="black"
           anchorX="center"
           anchorY="middle"
@@ -85,17 +98,44 @@ export default function Model() {
           3D Artist
         </Text>
 
-        <Text
-          font={'Helvetica'}
-          position={[0, 0, -1]}
-          fontSize={0.6}
-          color="black"
-          anchorX="center"
-          anchorY="middle"
-          renderOrder={1}
-        >
-          Julien Cardeillac
-        </Text>
+        {isMobile ? (
+          <>
+            <Text
+              font={'Helvetica'}
+              position={[-0.5, 0.6, -1]}
+              fontSize={0.6}
+              color="black"
+              anchorX="center"
+              anchorY="middle"
+              renderOrder={1}
+            >
+              Julien
+            </Text>
+            <Text
+              font={'Helvetica'}
+              position={[0, 0, -1]}
+              fontSize={0.6}
+              color="black"
+              anchorX="center"
+              anchorY="middle"
+              renderOrder={1}
+            >
+              Cardeillac
+            </Text>
+          </>
+        ) : (
+          <Text
+            font={'Helvetica'}
+            position={[0, 0, -1]}
+            fontSize={0.6}
+            color="black"
+            anchorX="center"
+            anchorY="middle"
+            renderOrder={1}
+          >
+            Julien Cardeillac
+          </Text>
+        )}
 
         {/* 3D object with hover effect */}
         <animated.mesh
@@ -103,14 +143,15 @@ export default function Model() {
           geometry={nodes.Sphere.geometry}
           material={nodes.Sphere.material}
           renderOrder={2}
-          scale={springProps.scale} // Directly use springProps.scale
+          scale={springProps.scale}
+          position={isMobile ? [0.2, 0, 0] : [0, 0, 0]}
           onPointerOver={handleHoverStart}
           onPointerOut={handleHoverEnd}
           onClick={handleClick}
         >
           <MeshTransmissionMaterial
             ref={materialRef}
-            thickness={springProps.thickness.get()} // Use .get() to get the actual value
+            thickness={springProps.thickness.get()}
             roughness={0.02}
             transmission={1}
             ior={1.5}
