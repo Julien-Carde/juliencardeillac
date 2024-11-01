@@ -108,6 +108,7 @@ export default function Model() {
           position={isMobile ? [0.2, 0, 0] : [0, 0, 0]}
           onPointerOver={!isMobile ? handleHoverStart : undefined} // Only apply hover on desktop
           onPointerOut={!isMobile ? handleHoverEnd : undefined}
+          onClick={isMobile ? handleTouch : undefined}
           onTouchStart={isMobile ? handleTouch : undefined} // Only apply touch on mobile
         >
           <MeshTransmissionMaterial
