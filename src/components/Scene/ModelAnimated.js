@@ -29,7 +29,7 @@ export default function Model() {
 
   // Animation properties with spring
   const [springProps, setSpring] = useSpring(() => ({
-    rotationSpeed: 0.01,
+    rotationSpeed: 0.005,
     thickness: isMobile ? 0 : 0.08,
     direction: 1,
     scale: [0.7, 0.7, 0.7],
@@ -51,8 +51,8 @@ export default function Model() {
 
   // Touch effect (mobile)
   const handleTouch = () => {
-    setSpring({ scale: [1.2, 1.2, 1.2], thickness: 0.5 });
-    setTimeout(() => setSpring({ scale: [0.7, 0.7, 0.7], thickness: isMobile ? 0 : 0.08 }), 1500);
+    setSpring({ thickness: 0.5, rotationSpeed: 0.03 });
+    setTimeout(() => setSpring({ thickness: 0, rotationSpeed: 0.005 }), 1500);
   };
 
   // Apply rotation and thickness
