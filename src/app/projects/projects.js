@@ -24,18 +24,18 @@ export default function Projects() {
             projectUrl: 'https://julien-carde.github.io/space-invaders/',
             stack: ['React','JavaScript','CSS'],
         },
-        {
-            title: 'Project 2',
-            description: 'Description description description description description description description description',
-            imageUrl: 'https://img.freepik.com/free-photo/communication-social-media-icons-personal-computer_23-2150781061.jpg',
-            projectUrl: 'https://julien-carde.github.io/space-invaders/',
-        },
-        {
-            title: 'Project 3',
-            description: 'Description description description description description description description description',
-            imageUrl: 'https://img.freepik.com/free-photo/communication-social-media-icons-personal-computer_23-2150781061.jpg',
-            projectUrl: 'https://julien-carde.github.io/space-invaders/',
-        },
+        // {
+        //     title: 'Project 2',
+        //     description: 'Description description description description description description description description',
+        //     imageUrl: 'https://img.freepik.com/free-photo/communication-social-media-icons-personal-computer_23-2150781061.jpg',
+        //     projectUrl: 'https://julien-carde.github.io/space-invaders/',
+        // },
+        // {
+        //     title: 'Project 3',
+        //     description: 'Description description description description description description description description',
+        //     imageUrl: 'https://img.freepik.com/free-photo/communication-social-media-icons-personal-computer_23-2150781061.jpg',
+        //     projectUrl: 'https://julien-carde.github.io/space-invaders/',
+        // },
     ];
 
     return (
