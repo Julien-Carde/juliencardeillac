@@ -32,7 +32,7 @@ export default function Index() {
         toneMapping: THREE.ACESFilmicToneMapping, // More realistic tone mapping
         colorSpace: THREE.SRGBColorSpace, // Set color space for true RGB representation
         outputEncoding: THREE.sRGBEncoding,
-        antialias: true,
+        antialias: false,
       }}
       style={{ background: 'transparent' }}
       camera={{
@@ -45,13 +45,8 @@ export default function Index() {
       <Mac />
 
       {/* Scene Lighting */}
-      <ambientLight intensity={3} /> 
-      <directionalLight
-        intensity={0}
-        position={[-5, 5, 5]}
-        color="#ffdab9"
-        castShadow
-      />
+      <ambientLight intensity={3}
+      castShadow={false} />
           
       {/* <EffectComposer>
       <FXAA /> 

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useMemo, useState } from 'react';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useProgress } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -68,8 +68,8 @@ export default function Mac() {
 
   useFrame(() => {
     if (mac.current) {
-      mac.current.rotation.x = THREE.MathUtils.lerp(mac.current.rotation.x, rotation.x, 0.05);
-      mac.current.rotation.y = THREE.MathUtils.lerp(mac.current.rotation.y, rotation.y, 0.05);
+      mac.current.rotation.x = THREE.MathUtils.lerp(mac.current.rotation.x, rotation.x, 0.06);
+      mac.current.rotation.y = THREE.MathUtils.lerp(mac.current.rotation.y, rotation.y, 0.06);
     }
   });
 

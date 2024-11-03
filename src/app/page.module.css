@@ -5,6 +5,16 @@
 }
 
 @font-face {
+    font-family: 'Rajdhani-Bold';
+    src: url('/fonts/Rajdhani/Rajdhani-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Rajdhani-SemiBold';
+    src: url('/fonts/Rajdhani/Rajdhani-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
     font-family: 'Montserrat';
     src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
 }
@@ -358,6 +368,9 @@
 
 /* Download button styling */
 .downloadButton {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
     text-align: center;
     padding-top: 50px;
     margin-bottom: 30px;
@@ -442,6 +455,14 @@
 .skillsDetails {
     font-family: 'Montserrat';
     font-size: 13px;
+}
+
+.strong {
+    font-family: 'Rajdhani-Bold';
+}
+
+.semi {
+    font-family: 'Rajdhani-SemiBold';
 }
 
 .experienceTitle {
@@ -654,3 +675,4 @@
     width: 20px;
     height: 20px;
 }
+

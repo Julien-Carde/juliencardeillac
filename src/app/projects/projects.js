@@ -19,10 +19,10 @@ export default function Projects() {
     const projects = [
         {
             title: 'Space Invaders',
-            description: 'A web emulation of a classic arcade game. Use your spacebar and arrow keys to control the spaceship',
+            description: 'A web emulation of the classic arcade game. Use your spacebar and arrow keys to control the spaceship !',
             imageUrl: 'https://arcademarquee.com/wp-content/uploads/2015/02/space-invaders_marquee.jpg',
             projectUrl: 'https://julien-carde.github.io/space-invaders/',
-            stack: ['React', 'CSS', 'JavaScript'],
+            stack: ['React','JavaScript','CSS'],
         },
         {
             title: 'Project 2',
