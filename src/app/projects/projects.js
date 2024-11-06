@@ -18,18 +18,19 @@ export default function Projects() {
 
     const projects = [
         {
+            title: '909 Drum Machine',
+            description: 'An online drum machine inspired by the legendary Roland TR-909, famous for shaping the sound of house and techno music',
+            imageUrl: '/medias/909_banner.png',
+            projectUrl: 'https://909-online-drum-machine.vercel.app/',
+            stack: ['React','JavaScript','CSS'],
+        },
+        {
             title: 'Space Invaders',
-            description: 'A web emulation of the classic arcade game. Use your spacebar and arrow keys to control the spaceship !',
-            imageUrl: 'https://arcademarquee.com/wp-content/uploads/2015/02/space-invaders_marquee.jpg',
+            description: 'A web version of the classic arcade game. Use your spacebar and arrow keys to control the spaceship !',
+            imageUrl: '/medias/SpaceInvaders_banner.png',
             projectUrl: 'https://julien-carde.github.io/space-invaders/',
             stack: ['React','JavaScript','CSS'],
         },
-        // {
-        //     title: 'Project 2',
-        //     description: 'Description description description description description description description description',
-        //     imageUrl: 'https://img.freepik.com/free-photo/communication-social-media-icons-personal-computer_23-2150781061.jpg',
-        //     projectUrl: 'https://julien-carde.github.io/space-invaders/',
-        // },
         // {
         //     title: 'Project 3',
         //     description: 'Description description description description description description description description',

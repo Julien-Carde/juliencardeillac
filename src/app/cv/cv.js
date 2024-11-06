@@ -107,7 +107,7 @@ export default function Cv() {
 
                         <div className={styles.timelineItem}>
                                 <div className={styles.logoContainer}>
-                                    <img src='https://scontent-cdg4-1.xx.fbcdn.net/v/t39.30808-6/348437844_1187922805256226_2525741885378635201_n.png?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=psL2vL8-HL0Q7kNvgGu_pAJ&_nc_zt=23&_nc_ht=scontent-cdg4-1.xx&_nc_gid=AUQK217e1h_htp2CR-e5mhh&oh=00_AYDvuMxmuUFYunqAqUuKdxVmPYA_Y13yn8tTgzWsWJnJxw&oe=6727DDE0' className={styles.logo} />
+                                    <img src='/medias/cnam_logo.png' className={styles.logo} />
                                 </div>
                                 <div className={styles.experienceDetails}>
                                     <p className={styles.experienceTitle}><span className={styles.semi}>Sept - Nov 2023</span> - Research Project, Biomechanical Visualization Web Application</p>
@@ -118,7 +118,7 @@ export default function Cv() {
                             
                             <div className={styles.timelineItem}>
                                 <div className={styles.logoContainer}>
-                                    <img src='https://scontent-cdg4-2.xx.fbcdn.net/v/t39.30808-6/305313379_512355844223183_7471193810225545954_n.png?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hvwKYO3Ai5gQ7kNvgEv1H4q&_nc_zt=23&_nc_ht=scontent-cdg4-2.xx&_nc_gid=Adrcmm7gMtDyv_NK8cn9FhR&oh=00_AYDS2HAoe94IyhOkfYi4aeFgfVnSDz5GtRBgqOuIet_qbg&oe=6727CEB1' className={styles.logo} />
+                                    <img src='/medias/mocaplab_logo.png' className={styles.logo} />
                                 </div>
                                 <div className={styles.experienceDetails}>
                                     <p className={styles.experienceTitle}><span className={styles.semi}>March - August 2023</span> - R&D Engineer (Final Internship) - Mocaplab</p>
