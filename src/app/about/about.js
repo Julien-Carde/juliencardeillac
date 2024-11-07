@@ -1,21 +1,27 @@
 'use client';
 import styles from '../page.module.css';
 import dynamic from 'next/dynamic';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Header from '../Header';
 import Mac from '../../components/computer/Index';
 
 export default function About() {
     const [showCursor, setShowCursor] = useState(true);
+    const [isMacLoaded, setIsMacLoaded] = useState(false);
 
     // Toggle cursor visibility every 500ms
     useEffect(() => {
         const cursorInterval = setInterval(() => {
             setShowCursor(prev => !prev);
-        }, 500); // Adjust time for faster or slower blinking
+        }, 500);
 
         return () => clearInterval(cursorInterval);
     }, []);
+
+    // Handler for when Mac model is loaded
+    const handleMacLoad = () => {
+        setIsMacLoaded(true);
+    };
 
     return (
         <>
@@ -37,7 +43,9 @@ export default function About() {
                 </div>
                 {/* Mac 3D Scene */}
                 <div className={styles.macModel}>
-                    <Mac />
+                    <Suspense fallback={<div className={styles.loader}></div>}>
+                        <Mac onLoad={handleMacLoad} />
+                    </Suspense>
                 </div>
             </div>
         </>

@@ -17,7 +17,7 @@ function useMediaQuery(query) {
   return matches;
 }
 
-export default function Mac() {
+export default function Mac({ onLoad }) {
   const { scene } = useGLTF('/medias/mac_grass_optimized.glb');
   const mac = useRef();
   const { viewport } = useThree();
@@ -72,6 +72,12 @@ export default function Mac() {
       mac.current.rotation.y = THREE.MathUtils.lerp(mac.current.rotation.y, rotation.y, 0.06);
     }
   });
+
+  useEffect(() => {
+    if (scene && onLoad) {
+      onLoad();
+    }
+  }, [scene, onLoad]);
 
   return (
     <group ref={mac} scale={[10, 10, 10]}>

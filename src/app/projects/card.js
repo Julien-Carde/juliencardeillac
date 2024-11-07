@@ -8,7 +8,9 @@ const technologyLogos = {
     'JavaScript': '/medias/javascript-155-svgrepo-com.svg',
     'Node.js': '/medias/node-js-svgrepo-com.svg',
     'Express': '/path/to/express-logo.png',
-    'MongoDB': '/path/to/mongodb-logo.png',
+    'MongoDB': '/medias/mongodb-svgrepo-com.svg',
+    'Three.js': '/medias/Three.js_Icon.svg.png',
+    'Next.js': '/medias/next-js-svgrepo-com.svg',
     // Add more technologies as needed
 };
 

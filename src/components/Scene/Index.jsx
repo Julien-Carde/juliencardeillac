@@ -7,17 +7,20 @@ import { useEffect } from 'react';
 
 
 
-export default function Index() {
+export default function Index({ onLoad }) {
 
   useEffect(() => {
     // Prevent scrolling
     document.body.style.overflow = 'hidden';
 
+    // Call onLoad when component mounts
+    onLoad?.();
+
     // Reset overflow when component unmounts
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, []);
+  }, [onLoad]);
   
   return (
     <Canvas
