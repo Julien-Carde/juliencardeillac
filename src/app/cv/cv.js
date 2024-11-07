@@ -87,7 +87,15 @@ export default function Cv() {
                                 </div>
                                 <div className={styles.experienceDetails}>
                                     <p className={styles.experienceTitle}><span className={styles.semi}>2020 - 2024</span> - Arts et Métiers - Grande Ecole Program</p>
-                                    <p>Generalist engineering school: electronics and electrical engineering, computer science, mechanics, energy, manufacturing processes, industrial product design, lean management, supply chain, project management.</p>
+                                    <p><strong>Generalist engineering school, multidisciplinary program :</strong><br /><br />
+                                    • Electronics and electrical engineering<br /><br />
+                                    • Computer science<br /><br />
+                                    • Mechanics and energy<br /><br />
+                                    • Manufacturing processes<br /><br />
+                                    • Industrial product design<br /><br />
+                                    • Lean management<br /><br />
+                                    • Supply chain<br /><br />
+                                    • Project management</p>
                                 </div>
                             </div>
                         </div>

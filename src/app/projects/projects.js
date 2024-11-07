@@ -28,7 +28,7 @@ export default function Projects() {
             title: 'Space Invaders',
             description: 'A web version of the classic arcade game. Use your spacebar and arrow keys to control the spaceship !',
             imageUrl: '/medias/SpaceInvaders_banner.png',
-            projectUrl: 'https://julien-carde.github.io/space-invaders/',
+            projectUrl: 'https://space-invaders-eight-zeta.vercel.app/',
             stack: ['React','JavaScript','CSS'],
         },
         // {

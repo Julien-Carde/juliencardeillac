@@ -26,12 +26,12 @@ export default function About() {
                         About Me<span className={styles.cursor}>{showCursor ? "_" : ""}</span>
                     </h2>
                     <p className={styles.aboutText}>
-                        Hello! I’m Julien Cardeillac, a 23-year-old engineer with a passion for 3D graphics, interactive web design, and creative innovation.
+                        Hello! I am Julien Cardeillac, a 23-year-old engineer with a passion for interactive web design, 3D graphics, and creative innovation.
                         My engineering background, combined with a keen interest in artistic expression, drives me to work on projects that blend technical precision with aesthetic impact.
 
                         <br />
                         <br />
-                        <p className={styles.optionalText}>Whether working on full-stack applications, 3D modeling or animation, I’m dedicated to continually building my skills, learning from experienced teams, and contributing to innovative projects that merge technology with design.
+                        <p className={styles.optionalText}>Whether working on full-stack applications, 3D modeling or animation, I am dedicated to continually building my skills, learning from experienced teams, and contributing to innovative projects that merge technology with design.
                         Welcome to my portfolio, where I share my journey through code, creativity, and continuous learning.</p>
                     </p>
                 </div>
