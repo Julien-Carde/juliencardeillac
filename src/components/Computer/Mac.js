@@ -18,7 +18,7 @@ function useMediaQuery(query) {
 }
 
 export default function Mac() {
-  const { scene } = useGLTF('/medias/compressed_mac_grass_V2.glb');
+  const { scene } = useGLTF('/medias/mac_grass_optimized.glb');
   const mac = useRef();
   const { viewport } = useThree();
   const isMobile = useMediaQuery('(max-width: 768px)');

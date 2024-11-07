@@ -87,10 +87,10 @@ export default function Cv() {
                                 </div>
                                 <div className={styles.experienceDetails}>
                                     <p className={styles.experienceTitle}><span className={styles.semi}>2020 - 2024</span> - Arts et Métiers - Grande Ecole Program</p>
-                                    <p><strong>Generalist engineering school, multidisciplinary program :</strong><br /><br />
-                                    • Electronics and electrical engineering<br /><br />
-                                    • Computer science<br /><br />
+                                    <p><span className={styles.programTitle}>Generalist engineering school, multidisciplinary program :</span><br /><br />
                                     • Mechanics and energy<br /><br />
+                                    • Computer science<br /><br />
+                                    • Electronics and electrical engineering<br /><br />                                    
                                     • Manufacturing processes<br /><br />
                                     • Industrial product design<br /><br />
                                     • Lean management<br /><br />
