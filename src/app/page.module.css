@@ -2,11 +2,15 @@
 @font-face {
     font-family: 'Rajdhani';
     src: url('/fonts/Rajdhani/Rajdhani-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
     font-family: 'Rajdhani-Bold';
     src: url('/fonts/Rajdhani/Rajdhani-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
@@ -29,6 +33,10 @@
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     background-color: rgb(226, 226, 226);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
 }
 
 /* Smooth fade-in for page loads */
@@ -603,7 +611,9 @@
 }
 
 .title {
-    font-family: 'Rajdhani';
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: normal;
+    font-style: normal;
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 10px;
@@ -611,7 +621,9 @@
 }
 
 .description {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    font-style: normal;
     text-align: justify ;
     font-size: 1rem;
     color: #666;

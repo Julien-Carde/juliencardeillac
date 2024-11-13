@@ -38,7 +38,8 @@ export default function About() {
                         <br />
                         <br />
                         <p className={styles.optionalText}>Whether working on full-stack applications, 3D modeling or animation, I am dedicated to continually building my skills, learning from experienced teams, and contributing to innovative projects that merge technology with design.
-                        Welcome to my portfolio, where I share my journey through code, creativity, and continuous learning.</p>
+                        Welcome to my portfolio, where I share my journey through code, creativity, and continuous learning. <span style={{ fontFamily: 'Courier New, Courier, monospace', display: 'inline-flex', alignItems: 'center' }}>(Made with <img src="/medias/nextjs.svg" alt="Next.js Logo" className={styles.logoStack} style={{ margin: '0 5px' }} /> Next.js and <img src="/medias/Three.js_Icon.svg.png" alt="Three.js Logo" className={styles.logoStack} style={{ margin: '0 5px' }} /> Three.js)</span>
+                        </p>
                     </p>
                 </div>
                 {/* Mac 3D Scene */}
