@@ -22,7 +22,7 @@ export default function Projects() {
             description: 'A web app that allows you to create a watchlist and get information about the movies you want to watch. Powered by the TMDB API.',
             imageUrl: '/medias/Watchlist_banner.png',
             projectUrl: 'https://watchlist-one-xi.vercel.app/',
-            stack: ['React', 'Node.js']
+            stack: ['React', 'Node.js', 'MongoDB']
         },
         {
             title: '909 Drum Machine',
