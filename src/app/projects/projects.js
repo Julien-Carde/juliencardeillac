@@ -1,11 +1,11 @@
-// Projects.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './card';
+import Graphics3DCard from './Graphics3DCard';
 import styles from '../page.module.css';
-import { useState, useEffect } from 'react';
 
 export default function Projects() {
     const [showCursor, setShowCursor] = useState(true);
+    const [activeCategory, setActiveCategory] = useState('web');
 
     // Toggle cursor visibility every 500ms
     useEffect(() => {
@@ -16,7 +16,7 @@ export default function Projects() {
         return () => clearInterval(cursorInterval);
     }, []);
 
-    const projects = [
+    const webProjects = [
         {
             title: 'Watchlist',
             description: 'A web app that allows you to create a watchlist and get information about the movies you want to watch. Powered by the TMDB API.',
@@ -37,24 +37,70 @@ export default function Projects() {
             imageUrl: '/medias/SpaceInvaders_banner.png',
             projectUrl: 'https://space-invaders-eight-zeta.vercel.app/',
             stack: ['React'],
+        }
+    ];
+
+    const graphicsProjects = [
+        {
+            title: 'Paris Underground',
+            description: 'Rendered with Blender Cycles, fisheye effect, color graded in DaVinci Resolve',
+            wireframeUrl: '/medias/CGI_Videos/Metro_Wireframe.mov',
+            renderUrl: '/medias/CGI_Videos/Metro.mov'
+        },
+        {
+            title: 'Clone of myself',
+            description: 'Rendered with Blender Cycles, color graded in DaVinci Resolve',
+            wireframeUrl: '/medias/CGI_Videos/Human_render_wireframe.mov',
+            renderUrl: '/medias/CGI_Videos/Human_render.mov'
+        },
+        {
+            title: 'Cigarette Close Up',
+            description: 'Rendered with Blender Cycles, Smoke simulation, color graded in DaVinci Resolve',
+            wireframeUrl: '/medias/CGI_Videos/Cigarette_wireframe_2.mov',
+            renderUrl: '/medias/CGI_Videos/Cigarette.mov'
         },
     ];
 
+    const projects = activeCategory === 'web' ? webProjects : graphicsProjects;
+
     return (
         <div className={styles.projectPageContainer}>
-        <h2 className={styles.webProjects}>Web Projects<span className={styles.cursor}>{showCursor ? "_" : ""}</span></h2>
-        <div className={styles.projectsContainer}>
-            {projects.map((project, index) => (
-                <Card
-                    key={index}
-                    title={project.title}
-                    description={project.description}
-                    imageUrl={project.imageUrl}
-                    projectUrl={project.projectUrl}
-                    stack={(project.stack || [])} // Ensure stack is an array before joining
-                />
-            ))}
-        </div>
+            <div className={styles.categorySelector}>
+                <span 
+                    className={activeCategory === 'web' ? styles.active : styles.inactive}
+                    onClick={() => setActiveCategory('web')}
+                >
+                    Web Projects<span className={styles.cursor}>{showCursor && activeCategory === 'web' ? "_" : ""}</span>
+                </span>
+                <span 
+                    className={activeCategory === 'graphics' ? styles.active : styles.inactive}
+                    onClick={() => setActiveCategory('graphics')}
+                >
+                    3D Graphics<span className={styles.cursor}>{showCursor && activeCategory === 'graphics' ? "_" : ""}</span>
+                </span>
+            </div>
+            <div className={activeCategory === 'web' ? styles.projectsContainerWeb : styles.projectsContainer3D}>
+                {projects.map((project, index) => (
+                    activeCategory === 'web' ? (
+                        <Card 
+                            key={index} 
+                            title={project.title} 
+                            description={project.description} 
+                            imageUrl={project.imageUrl} 
+                            projectUrl={project.projectUrl} 
+                            stack={project.stack} 
+                        />
+                    ) : (
+                        <Graphics3DCard 
+                            key={index} 
+                            title={project.title} 
+                            description={project.description} 
+                            wireframeUrl={project.wireframeUrl} 
+                            renderUrl={project.renderUrl} 
+                        />
+                    )
+                ))}
+            </div>
         </div>
     );
 }
