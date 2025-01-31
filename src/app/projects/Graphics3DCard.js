@@ -87,6 +87,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
         arrow: {
             pointerEvents: "none", // Prevent arrow interference
             userSelect: "none", // Prevent text selection
+            fontWeight: "",
             color: "gray",
             margin: "0 5px",
         },

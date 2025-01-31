@@ -59,6 +59,12 @@ export default function Projects() {
             wireframeUrl: '/medias/CGI_Videos/Cigarette_wireframe_2.mov',
             renderUrl: '/medias/CGI_Videos/Cigarette.mov'
         },
+        {
+            title: 'Giant Ball',
+            description: 'Rendered with Blender Cycles, Custom HDRI shot on location',
+            wireframeUrl: '/medias/CGI_Videos/Ball_Wireframe.mov',
+            renderUrl: '/medias/CGI_Videos/Garden_Ball.mov'
+        },
     ];
 
     const projects = activeCategory === 'web' ? webProjects : graphicsProjects;
