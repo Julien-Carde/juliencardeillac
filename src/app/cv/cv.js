@@ -167,7 +167,6 @@ export default function Cv() {
                             <p><strong>CAD</strong>: Catia, 3D Experience</p>
                             <p><strong>Machine Learning</strong>: PyTorch</p>
                             <p><strong>Video Editing</strong>: Premiere Pro, DaVinci Resolve</p>
-                            <p><strong>Visual Effects & 3D Animation</strong>: Blender, Maya, Unreal Engine</p>
                         </div>
                     </div>
                 </section>
