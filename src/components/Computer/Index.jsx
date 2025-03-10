@@ -31,7 +31,7 @@ export default function Index() {
       gl={{
         toneMapping: THREE.ACESFilmicToneMapping, // More realistic tone mapping
         colorSpace: THREE.SRGBColorSpace, // Set color space for true RGB representation
-        outputEncoding: THREE.sRGBEncoding,
+        outputEncoding: THREE.SRGBColorSpace,
         antialias: false,
       }}
       style={{ background: 'transparent' }}
@@ -45,7 +45,7 @@ export default function Index() {
       <Mac />
 
       {/* Scene Lighting */}
-      <ambientLight intensity={3}
+      <ambientLight intensity={10}
       castShadow={false} />
           
       {/* <EffectComposer>
