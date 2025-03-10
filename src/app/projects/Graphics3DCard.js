@@ -19,6 +19,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
+                console.log("Component is visible:", entry.isIntersecting); // Debugging
             },
             { threshold: 0.1 }
         );
@@ -44,6 +45,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
 
     const handleVideoLoaded = () => {
         setVideosLoaded(prev => prev + 1);
+        console.log("Video loaded, total loaded:", videosLoaded + 1); // Debugging
     };
 
     const handleSliderChange = (e) => {
@@ -172,6 +174,8 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                             poster="" // Add a low-res poster image URL here for faster initial render
                         >
                             <source src={renderUrl} type="video/webm" />
+                            <source src={renderUrl.replace(".webm", ".mp4")} type="video/mp4" />
+                            Your browser does not support the video tag.
                         </video>
                     </div>
                     
@@ -195,6 +199,8 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                             poster="" // Add a low-res poster image URL here for faster initial render
                         >
                             <source src={wireframeUrl} type="video/webm" />
+                            <source src={wireframeUrl.replace(".webm", ".mp4")} type="video/mp4" />
+                            Your browser does not support the video tag.
                         </video>
                     </div>
                     
