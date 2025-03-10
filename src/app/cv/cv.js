@@ -58,14 +58,30 @@ export default function Cv() {
                                     julien.cardeillac@ensam.eu
                                 </a>
                             </p>
-                            <p className={styles.infoItem}>
+                            {/* <p className={styles.infoItem}>
                                 <img
                                     src='/medias/placeholder-svgrepo-com.svg'
                                     alt='Location Icon'
                                     height='15px'
                                     style={{ marginRight: '8px' }}
                                 />
+                                <p classname={styles.paris}>
                                 Paris, France
+                                </p>
+                            </p> */}
+                            <p className={styles.githubItem}>
+                                <img
+                                    src='/medias/github_logo.png'
+                                    height='15px'
+                                    style={{ marginRight: '8px'}}
+                                    alt="GitHub Logo"
+                                />
+                                <a href="https://github.com/Julien-Carde"
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   style={{textDecoration: 'none' }}>
+                                    https://github.com/Julien-Carde
+                                </a>
                             </p>
                         </div>
                     </div>
@@ -88,14 +104,14 @@ export default function Cv() {
                                 <div className={styles.experienceDetails}>
                                     <p className={styles.experienceTitle}><span className={styles.semi}>2020 - 2024</span> - Arts et Métiers - Grande Ecole Program</p>
                                     <p><span className={styles.programTitle}>Generalist engineering school, multidisciplinary program :</span><br /><br />
-                                    • Mechanics and energy<br /><br />
-                                    • Computer science<br /><br />
-                                    • Electronics and electrical engineering<br /><br />                                    
-                                    • Manufacturing processes<br /><br />
-                                    • Industrial product design<br /><br />
-                                    • Lean management<br /><br />
-                                    • Supply chain<br /><br />
-                                    • Project management</p>
+                                        • Mechanics and energy<br /><br />
+                                        • Computer science<br /><br />
+                                        • Electronics and electrical engineering<br /><br />
+                                        • Manufacturing processes<br /><br />
+                                        • Industrial product design<br /><br />
+                                        • Lean management<br /><br />
+                                        • Supply chain<br /><br />
+                                        • Project management</p>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +129,7 @@ export default function Cv() {
                     <div className={`${styles['section-content']} ${expandedSection === 'experience' ? styles.expanded : ''}`}>
                         <div className={styles.timeline}>
 
-                        <div className={styles.timelineItem}>
+                            <div className={styles.timelineItem}>
                                 <div className={styles.logoContainer}>
                                     <img src='/medias/cnam_logo.png' className={styles.logo} />
                                 </div>
@@ -123,7 +139,7 @@ export default function Cv() {
                                         • Creating a web-based visualization interface using React and Three.js, enabling doctors to monitor and record patient movements for rehabilitation purposes</p>
                                 </div>
                             </div>
-                            
+
                             <div className={styles.timelineItem}>
                                 <div className={styles.logoContainer}>
                                     <img src='/medias/mocaplab_logo.png' className={styles.logo} />
@@ -135,7 +151,7 @@ export default function Cv() {
                                         • Preparation of sets and directing actors for Motion Capture shoots</p>
                                 </div>
                             </div>
-                            
+
 
                             <div className={styles.timelineItem}>
                                 <div className={styles.logoContainer}>
@@ -161,13 +177,13 @@ export default function Cv() {
                     </h3>
                     <div className={`${styles['section-content']} ${expandedSection === 'skills' ? styles.expanded : ''}`}>
                         <div className={styles.skillsDetails}>
-                        <p><strong>Full-stack</strong>: HTML, CSS, JavaScript, TypeScript, React, Node.js, MongoDB, SQL</p>
-                            <p><strong>Programming</strong>: Python, C++, Matlab</p>
-                            <p><strong>Visual Effects & 3D Animation</strong>: Blender, Maya, Unreal Engine</p>
+                            <p><strong>Full-stack</strong>: HTML, CSS, JavaScript, TypeScript, React, Node.js, MongoDB, SQL</p>
+                            <p><strong>Programming</strong>: Python, C++</p>
+                            <p><strong>Visual Effects & 3D Animation</strong>: Blender, After Effects</p>
                             <p><strong>CAD</strong>: Catia, 3D Experience</p>
                             <p><strong>Machine Learning</strong>: PyTorch</p>
                             <p><strong>Video Editing</strong>: Premiere Pro, DaVinci Resolve</p>
-                            <p><strong>Visual Effects & 3D Animation</strong>: Blender, Maya, Unreal Engine</p>
+                            <p><strong>Audio Mixing, sound design</strong>: Ableton Live</p>
                         </div>
                     </div>
                 </section>
@@ -182,7 +198,7 @@ export default function Cv() {
                     </h3>
                     <div className={`${styles['section-content']} ${expandedSection === 'languages' ? styles.expanded : ''}`}>
                         <p><span className={styles.strong}>French</span> - Native</p>
-                        <p><span className={styles.strong}>English</span> - Fluent (written and spoken)</p>
+                        <p><span className={styles.strong}>English</span> - Fluent (Toefl iBT: 102/120)</p>
                         <p><span className={styles.strong}>German</span> - Intermediate</p>
                     </div>
                 </section>
@@ -201,14 +217,14 @@ export default function Cv() {
                 </section>
 
                 <div className={styles.downloadButton}>
-                    <a href="/medias/CV_Julien_Cardeillac_English.pdf"
+                    <a href="/medias/CV_Julien_Cardeillac_Engineer.pdf"
                         download="CV_Julien_Cardeillac_(EN).pdf">
                         Download CV
                     </a>
-                    <a href="/medias/CV_Julien_Cardeillac_Dev.pdf"
+                    {/* <a href="/medias/CV_Julien_Cardeillac_Dev.pdf"
                         download="CV_Julien_Cardeillac_(FR).pdf">
                         Télécharger le CV
-                    </a>
+                    </a> */}
                 </div>
             </div>
         </>

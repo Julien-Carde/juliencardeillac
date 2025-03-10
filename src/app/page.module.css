@@ -73,6 +73,7 @@
 
 .nav {
     display: flex; /* Ensures inline display for nav items */
+    align-items: center;
     gap: 30px; /* Space between items */
 }
 
@@ -262,6 +263,17 @@
     border-radius: 8px;
 }
 
+.githubItem {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #555;
+}
+
+.githubItem a {
+    color: #555;
+}
+
 .infoItem {
     display: flex;
     gap: 10px;
@@ -270,6 +282,10 @@
 
 .infoItem a {
     text-decoration: none;
+    color: #555;
+}
+
+.paris {
     color: #555;
 }
 

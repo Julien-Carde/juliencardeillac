@@ -9,6 +9,13 @@ export default function Header({ onNavigate }) {
           <span className={styles.menuItem} onClick={() => onNavigate('about')}>About</span>
           <span className={styles.menuItem} onClick={() => onNavigate('projects')}>Projects</span>
           <span className={styles.menuItem} onClick={() => onNavigate('cv')}>CV</span>
+          <a href="https://github.com/Julien-Carde"
+              target="_blank">
+            <img src="medias/github_logo.png"
+              style={{marginTop: "2px"}}              
+               height="20px"
+               />
+          </a>
         </div>
       </header>
     );

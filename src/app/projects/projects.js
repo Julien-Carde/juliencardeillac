@@ -42,28 +42,34 @@ export default function Projects() {
 
     const graphicsProjects = [
         {
+            title: 'Car crash time-stop',
+            description: <>Introduction shot of my short-film <em>Airbag</em> (work in progress)</>,
+            wireframeUrl: '/medias/CGI_Videos/webm_output/Vivien_wireframe.webm',
+            renderUrl: '/medias/CGI_Videos/webm_output/Vivien.webm'
+        },
+        {
             title: 'Paris Underground',
             description: 'Rendered with Blender Cycles, fisheye effect, color graded in DaVinci Resolve',
-            wireframeUrl: '/medias/CGI_Videos/Metro_Wireframe.mov',
-            renderUrl: '/medias/CGI_Videos/Metro.mov'
+            wireframeUrl: '/medias/CGI_Videos/webm_output/Metro_Wireframe.webm',
+            renderUrl: '/medias/CGI_Videos/webm_output/Metro.webm'
         },
         {
             title: 'Clone of myself',
             description: 'Rendered with Blender Cycles, color graded in DaVinci Resolve',
-            wireframeUrl: '/medias/CGI_Videos/Human_render_wireframe.mov',
-            renderUrl: '/medias/CGI_Videos/Human_render.mov'
+            wireframeUrl: '/medias/CGI_Videos/webm_output/Human_render_wireframe.webm',
+            renderUrl: '/medias/CGI_Videos/webm_output/Human_render.webm'
         },
         {
             title: 'Cigarette Close Up',
             description: 'Rendered with Blender Cycles, Smoke simulation, color graded in DaVinci Resolve',
-            wireframeUrl: '/medias/CGI_Videos/Cigarette_wireframe_2.mov',
-            renderUrl: '/medias/CGI_Videos/Cigarette.mov'
+            wireframeUrl: '/medias/CGI_Videos/webm_output/Cigarette_wireframe_2.webm',
+            renderUrl: '/medias/CGI_Videos/webm_output/Cigarette.webm'
         },
         {
             title: 'Giant Ball',
             description: 'Rendered with Blender Cycles, Custom HDRI shot on location',
-            wireframeUrl: '/medias/CGI_Videos/Ball_Wireframe.mov',
-            renderUrl: '/medias/CGI_Videos/Garden_Ball.mov'
+            wireframeUrl: '/medias/CGI_Videos/webm_output/Ball_Wireframe.webm',
+            renderUrl: '/medias/CGI_Videos/webm_output/Garden_Ball.webm'
         },
     ];
 

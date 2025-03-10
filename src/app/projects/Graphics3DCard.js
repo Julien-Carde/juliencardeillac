@@ -67,6 +67,8 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             width: "1px",
             background: "white",
             left: `${sliderPosition}%`,
+            cursor: "ew-resize",
+
             zIndex: 2,
         },
         sliderHandle: {
@@ -80,7 +82,8 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             justifyContent: "space-between",
             background: "white",
             borderRadius: "50%",
-            cursor: "pointer",
+            cursor: "ew-resize",
+
             zIndex: 3,
             left: `${sliderPosition}%`,
         },
@@ -136,15 +139,14 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                             style={styles.video}
                             onTimeUpdate={handleTimeUpdate}
                         >
-                            <source src={renderUrl} type="video/mp4" />
+                            <source src={renderUrl} type="video/webm" />
                         </video>
                     </div>
                     {/* Foreground Video */}
                     <div
                         style={{
                             ...styles.videoWrapper,
-                            clipPath: `inset(0 0 0 ${sliderPosition}%)`,
-                        }}
+                            clipPath: `inset(0 0 0 ${Math.min(sliderPosition, 99.99)}%)`,                        }}
                     >
                         <video
                             ref={wireframeVideoRef}
