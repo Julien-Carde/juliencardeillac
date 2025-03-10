@@ -44,32 +44,32 @@ export default function Projects() {
         {
             title: 'Car crash time-stop',
             description: <>Introduction shot of my short-film <em>Airbag</em> (work in progress)</>,
-            wireframeUrl: '/medias/CGI_Videos/webm_output/vivien_wireframe_resized.webm',
-            renderUrl: '/medias/CGI_Videos/webm_output/vivien.webm'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/vivien_wireframe.mov?alt=media&token=dc4bcc14-f833-4fa9-8464-a043b1545352',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/vivien.mov?alt=media&token=9276dfc1-49ad-4f9a-8bf0-bd0f017b23e3'
         },
         {
             title: 'Paris Underground',
             description: 'Rendered with Blender Cycles, fisheye effect, color graded in DaVinci Resolve',
-            wireframeUrl: '/medias/CGI_Videos/webm_output/Metro_Wireframe.webm',
-            renderUrl: '/medias/CGI_Videos/webm_output/Metro.webm'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Metro_Wireframe.mov?alt=media&token=bc46f025-4269-449d-8f57-27858b2668c4',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Metro.mov?alt=media&token=95a39da6-e158-4a11-b16c-94641ced3a5c'
         },
         {
             title: 'Clone of myself',
             description: 'Rendered with Blender Cycles, color graded in DaVinci Resolve',
-            wireframeUrl: '/medias/CGI_Videos/webm_output/Human_render_wireframe.webm',
-            renderUrl: '/medias/CGI_Videos/webm_output/Human_render.webm'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Human_render_wireframe.mov?alt=media&token=39ec769d-5533-4080-8ae1-307c48e918de',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Human_render.mov?alt=media&token=e14493fb-4ae3-4438-8905-5d36a3e3f2ea'
         },
         {
             title: 'Cigarette Close Up',
             description: 'Rendered with Blender Cycles, Smoke simulation, color graded in DaVinci Resolve',
-            wireframeUrl: '/medias/CGI_Videos/webm_output/Cigarette_wireframe_2.webm',
-            renderUrl: '/medias/CGI_Videos/webm_output/Cigarette.webm'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Cigarette_wireframe_2.mov?alt=media&token=bc28eee7-af31-4df5-86ab-79eccfe62854',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Cigarette.mov?alt=media&token=491590df-825d-4b8e-8437-54791bf78e6e'
         },
         {
             title: 'Giant Ball',
             description: 'Rendered with Blender Cycles, Custom HDRI shot on location',
-            wireframeUrl: '/medias/CGI_Videos/webm_output/Ball_Wireframe.webm',
-            renderUrl: '/medias/CGI_Videos/webm_output/Garden_Ball.webm'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Ball_Wireframe.mov?alt=media&token=7cfd9766-5b54-435e-8394-1df95766a7f2',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Garden_Ball.mov?alt=media&token=a00eb509-87a5-4b91-8f7f-a72787f81221'
         },
     ];
 

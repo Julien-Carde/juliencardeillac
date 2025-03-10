@@ -4,6 +4,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
     const [sliderPosition, setSliderPosition] = useState(50); // Initial slider position at 50%
     const wireframeVideoRef = useRef(null);
     const renderVideoRef = useRef(null);
+    const containerRef = useRef(null);
 
     useEffect(() => {
         // Ensure videos play only when they are visible
@@ -20,8 +21,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             { threshold: 0.2 }
         );
 
-        if (wireframeVideoRef.current) observer.observe(wireframeVideoRef.current);
-        if (renderVideoRef.current) observer.observe(renderVideoRef.current);
+        if (containerRef.current) observer.observe(containerRef.current);
 
         return () => observer.disconnect();
     }, []);
@@ -58,8 +58,11 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
     return (
         <div style={styles.graphicsCardWrapper}>
             <div style={styles.graphicsCard}>
-                <div style={styles.videoComparisonContainer}>
-                    {/* Background Video */}
+                <div 
+                    ref={containerRef}
+                    style={styles.videoComparisonContainer}
+                >
+                    {/* Render Video (Left Side) */}
                     <div style={styles.videoWrapper}>
                         <video
                             ref={renderVideoRef}
@@ -67,21 +70,20 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                             loop
                             muted
                             playsInline
-                            preload="metadata"
-                            disableRemotePlayback
-                            decoding="async"
-                            loading="lazy"
+                            preload="auto"
                             style={styles.video}
                             onTimeUpdate={handleTimeUpdate}
                         >
                             <source src={renderUrl} type="video/webm" />
                         </video>
                     </div>
-                    {/* Foreground Video */}
-                    <div
+                    
+                    {/* Wireframe Video (Right Side - revealed by mask) */}
+                    <div 
                         style={{
                             ...styles.videoWrapper,
-                            clipPath: `inset(0 0 0 ${Math.min(sliderPosition, 99.99)}%)`,
+                            maskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`,
+                            WebkitMaskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`
                         }}
                     >
                         <video
@@ -90,25 +92,32 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                             loop
                             muted
                             playsInline
-                            preload="metadata"
-                            disableRemotePlayback
-                            decoding="async"
-                            loading="lazy"
+                            preload="auto"
                             style={styles.video}
                             onTimeUpdate={handleTimeUpdate}
                         >
                             <source src={wireframeUrl} type="video/webm" />
                         </video>
                     </div>
+                    
                     {/* Vertical Slider Line */}
                     <div style={styles.sliderLine}></div>
+                    
                     {/* Draggable Slider Handle with Arrows */}
                     <div style={styles.sliderHandle}>
                         <span style={styles.arrow}>&lt;</span>
                         <span style={styles.arrow}>&gt;</span>
                     </div>
+                    
                     {/* Hidden Range Slider */}
-                    <input type="range" min="0" max="100" value={sliderPosition} onChange={handleSliderChange} style={styles.slider} />
+                    <input 
+                        type="range" 
+                        min="0" 
+                        max="100" 
+                        value={sliderPosition} 
+                        onChange={handleSliderChange} 
+                        style={styles.slider} 
+                    />
                 </div>
                 <div style={styles.info}>
                     <h3 style={styles.title}>{title}</h3>
