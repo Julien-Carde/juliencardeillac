@@ -44,32 +44,32 @@ export default function Projects() {
         {
             title: 'Car crash time-stop',
             description: <>Introduction shot of my short-film <em>Airbag</em> (work in progress)</>,
-            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/vivien_wireframe.mov?alt=media&token=dc4bcc14-f833-4fa9-8464-a043b1545352',
-            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/vivien.mov?alt=media&token=9276dfc1-49ad-4f9a-8bf0-bd0f017b23e3'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/vivien_wireframe.webm?alt=media&token=5a6baef7-f6ea-42ca-b645-34462fe505ac',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/vivien.webm?alt=media&token=f82c05eb-853f-4aa5-b89d-42d34a6ba21e'
         },
         {
             title: 'Paris Underground',
             description: 'Rendered with Blender Cycles, fisheye effect, color graded in DaVinci Resolve',
-            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Metro_Wireframe.mov?alt=media&token=bc46f025-4269-449d-8f57-27858b2668c4',
-            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Metro.mov?alt=media&token=95a39da6-e158-4a11-b16c-94641ced3a5c'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Metro_Wireframe.webm?alt=media&token=a5088b64-4b0d-4d24-b914-24be9efa33e4',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Metro.webm?alt=media&token=7fe71855-4d0f-4fd8-bbc3-7868820bc306'
         },
         {
             title: 'Clone of myself',
             description: 'Rendered with Blender Cycles, color graded in DaVinci Resolve',
-            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Human_render_wireframe.mov?alt=media&token=39ec769d-5533-4080-8ae1-307c48e918de',
-            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Human_render.mov?alt=media&token=e14493fb-4ae3-4438-8905-5d36a3e3f2ea'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Human_render_wireframe.webm?alt=media&token=8eb712e8-1f3f-4e13-961e-13158f6bd907',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Human_render.webm?alt=media&token=b5003e67-0bb5-4470-aa7a-598722da4cc8'
         },
         {
             title: 'Cigarette Close Up',
             description: 'Rendered with Blender Cycles, Smoke simulation, color graded in DaVinci Resolve',
-            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Cigarette_wireframe_2.mov?alt=media&token=bc28eee7-af31-4df5-86ab-79eccfe62854',
-            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Cigarette.mov?alt=media&token=491590df-825d-4b8e-8437-54791bf78e6e'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Cigarette_wireframe.webm?alt=media&token=6ba3b009-b97d-4c51-bf2f-69e183d837e3',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Cigarette.webm?alt=media&token=ee95d4ef-7332-43ed-8731-56ef6485a81e'
         },
         {
             title: 'Giant Ball',
             description: 'Rendered with Blender Cycles, Custom HDRI shot on location',
-            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Ball_Wireframe.mov?alt=media&token=7cfd9766-5b54-435e-8394-1df95766a7f2',
-            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Garden_Ball.mov?alt=media&token=a00eb509-87a5-4b91-8f7f-a72787f81221'
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Ball_Wireframe.webm?alt=media&token=ec8b967f-2fdb-444a-b86d-9c86d67cc2f9',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Garden_Ball.webm?alt=media&token=72877d2b-f9ec-457d-9547-2feefcaddd90'
         },
     ];
 
