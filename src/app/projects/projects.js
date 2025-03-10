@@ -44,8 +44,8 @@ export default function Projects() {
         {
             title: 'Car crash time-stop',
             description: <>Introduction shot of my short-film <em>Airbag</em> (work in progress)</>,
-            wireframeUrl: '/medias/CGI_Videos/webm_output/Vivien_wireframe.webm',
-            renderUrl: '/medias/CGI_Videos/webm_output/Vivien.webm'
+            wireframeUrl: '/medias/CGI_Videos/webm_output/vivien_wireframe.webm',
+            renderUrl: '/medias/CGI_Videos/webm_output/vivien.webm'
         },
         {
             title: 'Paris Underground',
