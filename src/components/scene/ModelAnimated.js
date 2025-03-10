@@ -1,5 +1,5 @@
 // Import dependencies
-import React, { useRef, useEffect, useMemo, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { MeshTransmissionMaterial, useGLTF, Text } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useSpring, animated, easings } from '@react-spring/three';
@@ -55,12 +55,12 @@ export default function Model() {
     setTimeout(() => setSpring({ thickness: 0, rotationSpeed: 0.005 }), 1500);
   };
 
-  // Apply rotation and thickness
+  // Apply rotation and thickness (optimized)
   useFrame(() => {
-    if (torus.current) {
+    if (torus.current && springProps.rotationSpeed.get() > 0) {
       torus.current.rotation.y += springProps.rotationSpeed.get() * springProps.direction.get();
     }
-    if (materialRef.current) {
+    if (materialRef.current && materialRef.current.thickness !== springProps.thickness.get()) {
       materialRef.current.thickness = springProps.thickness.get();
     }
   });
@@ -76,24 +76,64 @@ export default function Model() {
           <meshBasicMaterial color="white" />
         </mesh>
 
-        <Text font={'Helvetica'} position={isMobile ? [-0.45, -0.4, -1] : [0, -0.4, -1]} fontSize={isMobile ? 0.2 : 0.15} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
+        <Text
+          font="/fonts/Helvetica.ttf"
+          position={isMobile ? [-0.45, -0.4, -1] : [0, -0.4, -1]}
+          fontSize={isMobile ? 0.2 : 0.15}
+          color="black"
+          anchorX="center"
+          anchorY="middle"
+          renderOrder={5} // Increased render order to make sure text is on top
+        >
           Software Engineer
         </Text>
-        <Text font={'Helvetica'} position={isMobile ? [-0.87, -0.65, -1] : [0, -0.6, -1]} fontSize={isMobile ? 0.2 : 0.15} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
+        <Text
+          font="/fonts/Helvetica.ttf"
+          position={isMobile ? [-0.87, -0.65, -1] : [0, -0.6, -1]}
+          fontSize={isMobile ? 0.2 : 0.15}
+          color="black"
+          anchorX="center"
+          anchorY="middle"
+          renderOrder={5} // Ensure text is rendered on top
+        >
           3D Artist
         </Text>
 
         {isMobile ? (
           <>
-            <Text font={'Helvetica'} position={[-0.5, 0.6, -1]} fontSize={0.6} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
+            <Text
+              font="/fonts/Helvetica.ttf"
+              position={[-0.5, 0.6, -1]}
+              fontSize={0.6}
+              color="black"
+              anchorX="center"
+              anchorY="middle"
+              renderOrder={5}
+            >
               Julien
             </Text>
-            <Text font={'Helvetica'} position={[0, 0, -1]} fontSize={0.6} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
+            <Text
+              font="/fonts/Helvetica.ttf"
+              position={[0, 0, -1]}
+              fontSize={0.6}
+              color="black"
+              anchorX="center"
+              anchorY="middle"
+              renderOrder={5}
+            >
               Cardeillac
             </Text>
           </>
         ) : (
-          <Text font={'Helvetica'} position={[0, 0, -1]} fontSize={0.6} color="black" anchorX="center" anchorY="middle" renderOrder={1}>
+          <Text
+            font="/fonts/Helvetica.ttf"
+            position={[0, 0, -1]}
+            fontSize={0.6}
+            color="black"
+            anchorX="center"
+            anchorY="middle"
+            renderOrder={5}
+          >
             Julien Cardeillac
           </Text>
         )}
@@ -103,7 +143,7 @@ export default function Model() {
           ref={torus}
           geometry={nodes.Sphere.geometry}
           material={nodes.Sphere.material}
-          renderOrder={2}
+          renderOrder={2} // Keep it below text
           scale={springProps.scale}
           position={isMobile ? [0.2, 0, 0] : [0, 0, 0]}
           onPointerOver={!isMobile ? handleHoverStart : undefined} // Only apply hover on desktop
@@ -120,9 +160,8 @@ export default function Model() {
             chromaticAberration={0.2}
             metalness={0}
             transparent={true}
-            background={new THREE.Color('white')}
-            resolution={2048}
-            samples={8}
+            resolution={1024} // Optimized for performance
+            samples={4} // Reduced for better performance
             backside={true}
           />
         </animated.mesh>
