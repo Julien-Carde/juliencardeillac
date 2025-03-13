@@ -151,16 +151,17 @@
 .aboutContainer {
     position: relative;
     width: 100%;
-    height: calc(100vh - 110px);
-    overflow: hidden; /* Prevents overflow from large 3D scene */
-}
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
 /* About section */
 .aboutSection {
     position: absolute;
     top: -2%; /* Adjust as needed to align vertically */
-    left: 50%; /* Shift it towards the right */
-    width: 40%; /* Adjust the width if needed */
+    left: 40%; /* Shift it towards the right */
+    width: 45%; /* Adjust the width if needed */
     padding: 0px;
     font-family: 'Rajdhani', sans-serif;
     color: #333;
@@ -197,6 +198,7 @@
     text-align: justify;
     margin-top: 0;
     z-index: 2;
+    width: 55vw;
 }
 
 @media (max-width: 768px) {
