@@ -21,7 +21,7 @@ export default function ShortFilm() {
                     Airbag follows a fashion photographer who dies in a car accident after a tense argument with a model about her growing discomfort with being objectified. As tensions rise, his perception fractures, hallucinations blur the boundary between reality and fantasy, culminating in a fatal crash.
                 </p>
                 <p>
-                    After reading Baudrillard’s Simulacra and Simulation, I was inspired to explore hyperreality and the male gaze, questioning how the photographer’s world is not an objective reality but a fabricated construct shaped by his lens and the industry around him. His gaze reduces the model to an image, a commodity to be consumed, until she resists objectification, fracturing his control, making fantasy colliding with the Real.
+                    After reading Baudrillard’s Simulacra and Simulation, I was inspired to explore hyperreality and the male gaze, questioning how the photographer’s world is not an objective reality but a fabricated construct shaped by his lens and the industry around him. His gaze reduces the model to an image, a commodity to be consumed, until she resists objectification, fracturing his control, making fantasy collide with the Real.
                 </p>
                 <p>
                     <span className={styles.filmBold}>Cast:</span> Coralie Nadel, Vivien Verdureau

@@ -12,6 +12,10 @@ const technologyLogos = {
     'MongoDB': '/medias/mongodb-svgrepo-com.svg',
     'Three.js': '/medias/Three.js_Icon.svg.png',
     'Next.js': '/medias/next-js-svgrepo-com.svg',
+    'C++' : '/medias/C++.png',
+    'OpenGL' : '/medias/openGL.png',
+    'Python' : '/medias/python.webp',
+    'Blender API' : '/medias/blender.png'
 };
 
 export default function Card({ title, description, imageUrl, projectUrl, stack, isGraphicsProject, wireframeUrl, renderUrl }) {

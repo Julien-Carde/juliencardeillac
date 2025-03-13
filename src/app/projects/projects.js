@@ -12,7 +12,7 @@ export default function Projects() {
     useEffect(() => {
         const cursorInterval = setInterval(() => {
             setShowCursor(prev => !prev);
-        }, 500); // Adjust time for faster or slower blinking
+        }, 500); 
 
         return () => clearInterval(cursorInterval);
     }, []);
@@ -74,7 +74,32 @@ export default function Projects() {
         },
     ];
 
-    const projects = activeCategory === 'web' ? webProjects : graphicsProjects;
+    const programmingProjects = [
+        {
+            title: 'OBJ file viewer',
+            description: 'A C++ OpenGL program that allows displaying any OBJ file with basic lighting',
+            imageUrl: '/medias/OBJ_preview.png',
+            projectUrl: 'https://github.com/Julien-Carde/OBJ-file-viewer',
+            stack: ['C++']
+        },
+        {
+            title: 'MVNX to Blender rig',
+            description: 'A Python program that converts MVNX motion capture data into a Blender rig animation',
+            imageUrl: '/medias/mocap.webp',
+            projectUrl: 'https://github.com/Julien-Carde/MVNX-to-blender',
+            stack: ['Python']
+        }
+    ];
+
+    // Determine which projects to display
+    let projects = [];
+    if (activeCategory === 'web') {
+        projects = webProjects;
+    } else if (activeCategory === 'graphics') {
+        projects = graphicsProjects;
+    } else if (activeCategory === 'programming') {
+        projects = programmingProjects;
+    }
 
     return (
         <div className={styles.projectPageContainer}>
@@ -84,6 +109,12 @@ export default function Projects() {
                     onClick={() => setActiveCategory('web')}
                 >
                     Web Projects<span className={styles.cursor}>{showCursor && activeCategory === 'web' ? "_" : ""}</span>
+                </span>
+                <span 
+                    className={activeCategory === 'programming' ? styles.active : styles.inactive}
+                    onClick={() => setActiveCategory('programming')}
+                >
+                    C++ / Python<span className={styles.cursor}>{showCursor && activeCategory === 'programming' ? "_" : ""}</span>
                 </span>
                 <span 
                     className={activeCategory === 'graphics' ? styles.active : styles.inactive}
@@ -98,14 +129,22 @@ export default function Projects() {
                     Short Film<span className={styles.cursor}>{showCursor && activeCategory === 'shortFilm' ? "_" : ""}</span>
                 </span>
             </div>
-    
+
             {/* Conditionally render projects OR ShortFilm */}
             {activeCategory === 'shortFilm' ? (
                 <ShortFilm />
             ) : (
-                <div className={activeCategory === 'web' ? styles.projectsContainerWeb : styles.projectsContainer3D}>
+                <div className={activeCategory === 'web' || activeCategory === 'programming' ? styles.projectsContainerWeb : styles.projectsContainer3D}>
                     {projects.map((project, index) => (
-                        activeCategory === 'web' ? (
+                        activeCategory === 'graphics' ? (
+                            <Graphics3DCard 
+                                key={index} 
+                                title={project.title} 
+                                description={project.description} 
+                                wireframeUrl={project.wireframeUrl} 
+                                renderUrl={project.renderUrl} 
+                            />
+                        ) : (
                             <Card 
                                 key={index} 
                                 title={project.title} 
@@ -113,14 +152,6 @@ export default function Projects() {
                                 imageUrl={project.imageUrl} 
                                 projectUrl={project.projectUrl} 
                                 stack={project.stack} 
-                            />
-                        ) : (
-                            <Graphics3DCard 
-                                key={index} 
-                                title={project.title} 
-                                description={project.description} 
-                                wireframeUrl={project.wireframeUrl} 
-                                renderUrl={project.renderUrl} 
                             />
                         )
                     ))}
