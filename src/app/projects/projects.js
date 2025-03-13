@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './card';
 import Graphics3DCard from './Graphics3DCard';
+import ShortFilm from './ShortFilm';
 import styles from '../page.module.css';
 
 export default function Projects() {
@@ -90,29 +91,41 @@ export default function Projects() {
                 >
                     3D Graphics<span className={styles.cursor}>{showCursor && activeCategory === 'graphics' ? "_" : ""}</span>
                 </span>
+                <span 
+                    className={activeCategory === 'shortFilm' ? styles.active : styles.inactive}
+                    onClick={() => setActiveCategory('shortFilm')}
+                >
+                    Short Film<span className={styles.cursor}>{showCursor && activeCategory === 'shortFilm' ? "_" : ""}</span>
+                </span>
             </div>
-            <div className={activeCategory === 'web' ? styles.projectsContainerWeb : styles.projectsContainer3D}>
-                {projects.map((project, index) => (
-                    activeCategory === 'web' ? (
-                        <Card 
-                            key={index} 
-                            title={project.title} 
-                            description={project.description} 
-                            imageUrl={project.imageUrl} 
-                            projectUrl={project.projectUrl} 
-                            stack={project.stack} 
-                        />
-                    ) : (
-                        <Graphics3DCard 
-                            key={index} 
-                            title={project.title} 
-                            description={project.description} 
-                            wireframeUrl={project.wireframeUrl} 
-                            renderUrl={project.renderUrl} 
-                        />
-                    )
-                ))}
-            </div>
+    
+            {/* Conditionally render projects OR ShortFilm */}
+            {activeCategory === 'shortFilm' ? (
+                <ShortFilm />
+            ) : (
+                <div className={activeCategory === 'web' ? styles.projectsContainerWeb : styles.projectsContainer3D}>
+                    {projects.map((project, index) => (
+                        activeCategory === 'web' ? (
+                            <Card 
+                                key={index} 
+                                title={project.title} 
+                                description={project.description} 
+                                imageUrl={project.imageUrl} 
+                                projectUrl={project.projectUrl} 
+                                stack={project.stack} 
+                            />
+                        ) : (
+                            <Graphics3DCard 
+                                key={index} 
+                                title={project.title} 
+                                description={project.description} 
+                                wireframeUrl={project.wireframeUrl} 
+                                renderUrl={project.renderUrl} 
+                            />
+                        )
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
