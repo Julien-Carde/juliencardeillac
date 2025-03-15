@@ -131,7 +131,7 @@ export default function Cv() {
 
                             <div className={styles.timelineItem}>
                                 <div className={styles.logoContainer}>
-                                    <img src='/medias/cnam_logo.png' className={styles.logo} />
+                                    <img src='/medias/Screenshot 2024-10-30 at 10.00.09.png' className={styles.logo} />
                                 </div>
                                 <div className={styles.experienceDetails}>
                                     <p className={styles.experienceTitle}><span className={styles.semi}>Sept - Nov 2023</span> - Research Project, Biomechanical Visualization Web Application</p>
