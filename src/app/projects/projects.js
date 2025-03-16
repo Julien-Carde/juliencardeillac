@@ -83,6 +83,13 @@ export default function Projects() {
             stack: ['C++']
         },
         {
+            title: 'Python Ray Tracer',
+            description: 'A Python ray tracing program that simulates the physical behavior of light to render a photorealistic 3D scene',
+            imageUrl: '/medias/raytraced_image_cropped.png',
+            projectUrl: 'https://github.com/Julien-Carde/Python-Ray-Tracer',
+            stack: ['Python']
+        },
+        {
             title: 'MVNX to Blender rig',
             description: 'A Python program that converts MVNX motion capture data into a Blender rig animation',
             imageUrl: '/medias/mocap.webp',
