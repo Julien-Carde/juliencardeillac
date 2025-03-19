@@ -20,12 +20,22 @@ function useMediaQuery(query) {
   return matches;
 }
 
-export default function Model() {
+export default function Model({ onLoad }) {
   const { nodes } = useGLTF('/medias/AbstractBall.glb');
   const { viewport } = useThree();
   const torus = useRef();
   const materialRef = useRef();
   const isMobile = useMediaQuery('(max-width: 768px)'); // Detect mobile screens
+
+  // Ensure `onLoad` fires after model is fully loaded
+  // useEffect(() => {
+  //   if (nodes && onLoad) {
+  //     setTimeout(() => {
+  //       console.log("Model fully loaded, triggering onLoad");
+  //       onLoad();
+  //     }, 500); // Small delay to ensure assets are ready
+  //   }
+  // }, [nodes, onLoad]);
 
   // Animation properties with spring
   const [springProps, setSpring] = useSpring(() => ({
@@ -57,11 +67,18 @@ export default function Model() {
 
   // Apply rotation and thickness (optimized)
   useFrame(() => {
-    if (torus.current && springProps.rotationSpeed.get() > 0) {
-      torus.current.rotation.y += springProps.rotationSpeed.get() * springProps.direction.get();
+    if (torus.current) {
+      const rotationSpeed = springProps.rotationSpeed.get();
+      if (rotationSpeed > 0) {
+        torus.current.rotation.y += rotationSpeed * springProps.direction.get();
+      }
     }
-    if (materialRef.current && materialRef.current.thickness !== springProps.thickness.get()) {
-      materialRef.current.thickness = springProps.thickness.get();
+
+    if (materialRef.current) {
+      const newThickness = springProps.thickness.get();
+      if (materialRef.current.thickness !== newThickness) {
+        materialRef.current.thickness = newThickness;
+      }
     }
   });
 
@@ -76,29 +93,7 @@ export default function Model() {
           <meshBasicMaterial color="white" />
         </mesh>
 
-        <Text
-          font="/fonts/Helvetica.ttf"
-          position={isMobile ? [-0.45, -0.4, -1] : [0, -0.4, -1]}
-          fontSize={isMobile ? 0.2 : 0.15}
-          color="black"
-          anchorX="center"
-          anchorY="middle"
-          renderOrder={5} // Increased render order to make sure text is on top
-        >
-          Software Engineer
-        </Text>
-        <Text
-          font="/fonts/Helvetica.ttf"
-          position={isMobile ? [-0.87, -0.65, -1] : [0, -0.6, -1]}
-          fontSize={isMobile ? 0.2 : 0.15}
-          color="black"
-          anchorX="center"
-          anchorY="middle"
-          renderOrder={5} // Ensure text is rendered on top
-        >
-          3D Artist
-        </Text>
-
+        {/* Animated Name Text */}
         {isMobile ? (
           <>
             <Text
@@ -138,7 +133,31 @@ export default function Model() {
           </Text>
         )}
 
-        {/* 3D object with hover and touch effect */}
+        {/* Job Titles */}
+        <Text
+          font="/fonts/Helvetica.ttf"
+          position={isMobile ? [-0.45, -0.4, -1] : [0, -0.4, -1]}
+          fontSize={isMobile ? 0.2 : 0.15}
+          color="black"
+          anchorX="center"
+          anchorY="middle"
+          renderOrder={5}
+        >
+          Software Engineer
+        </Text>
+        <Text
+          font="/fonts/Helvetica.ttf"
+          position={isMobile ? [-0.87, -0.65, -1] : [0, -0.6, -1]}
+          fontSize={isMobile ? 0.2 : 0.15}
+          color="black"
+          anchorX="center"
+          anchorY="middle"
+          renderOrder={5}
+        >
+          3D Artist
+        </Text>
+
+        {/* 3D Object */}
         <animated.mesh
           ref={torus}
           geometry={nodes.Sphere.geometry}
@@ -146,7 +165,7 @@ export default function Model() {
           renderOrder={2} // Keep it below text
           scale={springProps.scale}
           position={isMobile ? [0.2, 0, 0] : [0, 0, 0]}
-          onPointerOver={!isMobile ? handleHoverStart : undefined} // Only apply hover on desktop
+          onPointerOver={!isMobile ? handleHoverStart : undefined} // Only hover on desktop
           onPointerOut={!isMobile ? handleHoverEnd : undefined}
           onClick={isMobile ? handleTouch : undefined}
           onTouchStart={isMobile ? handleTouch : undefined} // Only apply touch on mobile
