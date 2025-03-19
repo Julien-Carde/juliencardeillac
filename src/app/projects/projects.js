@@ -33,6 +33,13 @@ export default function Projects() {
             stack: ['React'],
         },
         {
+            title: 'Motion Lab',
+            description: 'A 3D Motion Visualizer designed for an academic project, enabling doctors to track patient movements during rehabilitation. This preview showcases the interface and example animations.',
+            imageUrl: '/medias/MotionLab.png',
+            projectUrl: 'https://motion-lab-teal.vercel.app/',
+            stack: ['React', 'Three.js'],
+        },
+        {
             title: 'Space Invaders',
             description: 'A web version of the classic arcade game. Use your spacebar and arrow keys to control the spaceship and shoot the invaders! Works on mobile and desktop.',
             imageUrl: '/medias/SpaceInvaders_banner.png',
