@@ -20,22 +20,25 @@ function useMediaQuery(query) {
   return matches;
 }
 
-export default function Model({ onLoad }) {
-  const { nodes } = useGLTF('/medias/AbstractBall.glb');
+export default function Model({ onLoad, onProgress }) {
+  const { nodes, materials } = useGLTF('/medias/AbstractBall.glb', (xhr) => {
+    // Track loading progress
+    if (onProgress) {
+      const progress = (xhr.loaded / xhr.total) * 100;
+      onProgress(progress);
+    }
+  });
+  
   const { viewport } = useThree();
   const torus = useRef();
   const materialRef = useRef();
   const isMobile = useMediaQuery('(max-width: 768px)'); // Detect mobile screens
 
-  // Ensure `onLoad` fires after model is fully loaded
-  // useEffect(() => {
-  //   if (nodes && onLoad) {
-  //     setTimeout(() => {
-  //       console.log("Model fully loaded, triggering onLoad");
-  //       onLoad();
-  //     }, 500); // Small delay to ensure assets are ready
-  //   }
-  // }, [nodes, onLoad]);
+  useEffect(() => {
+    if (nodes && onLoad) {
+      onLoad();
+    }
+  }, [nodes, onLoad]);
 
   // Animation properties with spring
   const [springProps, setSpring] = useSpring(() => ({
@@ -87,7 +90,7 @@ export default function Model({ onLoad }) {
       <ambientLight intensity={2} />
       <directionalLight position={[10, 10, 10]} intensity={1.5} />
 
-      <group scale={viewport.width / 6}>
+      <group scale={isMobile ? viewport.width / 2.5 : viewport.width / 6}>
         <mesh position={[0, 0, -2]}>
           <planeGeometry args={[20, 20]} />
           <meshBasicMaterial color="white" />

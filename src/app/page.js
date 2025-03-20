@@ -3,36 +3,31 @@ import styles from './page.module.css';
 import dynamic from 'next/dynamic';
 import React, { useState, Suspense, useCallback } from 'react';
 import Header from './Header';
+import Glass from './glass';
 import About from './about/about';
 import Projects from './projects/projects';
 import Cv from './cv/cv';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Loader component separated for clarity
-const Loader = () => (
-  <div className={styles.loaderWrapper}>
-    <div className={styles.loaderHome}></div>
-  </div>
-);
+
 
 // Load Scene dynamically (disable SSR)
-const Scene = dynamic(() => import('../components/scene/Index'), { 
-  ssr: false,
-  loading: () => <Loader />
-});
+// const Scene = dynamic(() => import('../components/scene/Index'), { 
+//   ssr: false,
+// });
 
 export default function Home() {
   const [activePage, setActivePage] = useState('home');
-  const [sceneIsLoaded, setSceneIsLoaded] = useState(false);
+  // const [sceneIsLoaded, setSceneIsLoaded] = useState(false);
 
   const handleNavigation = (page) => {
     setActivePage(page);
   };
 
-  const handleSceneLoad = useCallback(() => {
-    setSceneIsLoaded(true);
-    console.log('Scene loaded successfully');
-  }, []);
+  // const handleSceneLoad = useCallback(() => {
+  //   setSceneIsLoaded(true);
+  //   console.log('Scene loaded successfully');
+  // }, []);
 
   // Transition settings for non-home pages
   const transitionSettings = {
@@ -49,9 +44,7 @@ export default function Home() {
         <div className={styles.contentWrapper}>
           <AnimatePresence mode="wait">
             {activePage === 'home' && (
-              <div className={styles.scene} key="home" style={{ position: 'relative', zIndex: 1 }}>
-                <Scene onLoad={handleSceneLoad} />
-              </div>
+              <Glass />
             )}
             {activePage === 'about' && (
               <motion.div key="about" {...transitionSettings}>
