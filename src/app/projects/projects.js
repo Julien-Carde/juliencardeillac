@@ -21,28 +21,28 @@ export default function Projects() {
         {
             title: 'Watchlist',
             description: 'A web app that allows you to create a watchlist and get information about the movies you want to watch. Powered by the TMDB API.',
-            imageUrl: '/medias/Watchlist_banner.png',
+            imageUrl: '/medias/banners/Watchlist_banner.webp',
             projectUrl: 'https://watchlist-one-xi.vercel.app/',
             stack: ['React', 'Node.js', 'MongoDB']
         },
         {
             title: '909 Drum Machine',
             description: 'An online drum machine inspired by the legendary Roland TR-909, famous for shaping the sound of house and techno music',
-            imageUrl: '/medias/909_banner.png',
+            imageUrl: '/medias/banners/TR-909_banner.webp',
             projectUrl: 'https://909-online-drum-machine.vercel.app/',
             stack: ['React'],
         },
         {
             title: 'Motion Lab',
             description: 'A 3D Motion Visualizer designed for an academic project, enabling doctors to track patient movements during rehabilitation. This preview showcases the interface and example animations.',
-            imageUrl: '/medias/MotionLab.png',
+            imageUrl: '/medias/banners/MotionLab.webp',
             projectUrl: 'https://motion-lab-teal.vercel.app/',
             stack: ['React', 'Three.js'],
         },
         {
             title: 'Space Invaders',
             description: 'A web version of the classic arcade game. Use your spacebar and arrow keys to control the spaceship and shoot the invaders! Works on mobile and desktop.',
-            imageUrl: '/medias/SpaceInvaders_banner.png',
+            imageUrl: '/medias/banners/SpaceInvaders_banner.webp',
             projectUrl: 'https://space-invaders-eight-zeta.vercel.app/',
             stack: ['React'],
         }
@@ -85,21 +85,21 @@ export default function Projects() {
         {
             title: 'OBJ file viewer',
             description: 'A C++ OpenGL program that allows displaying any OBJ file with basic lighting',
-            imageUrl: '/medias/OBJ_preview.png',
+            imageUrl: '/medias/banners/OBJ_preview.webp',
             projectUrl: 'https://github.com/Julien-Carde/OBJ-file-viewer',
             stack: ['C++']
         },
         {
             title: 'Python Ray Tracer',
             description: 'A Python ray tracing program that simulates the physical behavior of light to render a photorealistic 3D scene',
-            imageUrl: '/medias/raytraced_image_cropped.png',
+            imageUrl: '/medias/banners/raytraced_image_cropped.webp',
             projectUrl: 'https://github.com/Julien-Carde/Python-Ray-Tracer',
             stack: ['Python']
         },
         {
             title: 'MVNX to Blender rig',
             description: 'A Python program that converts MVNX motion capture data into a Blender rig animation',
-            imageUrl: '/medias/mocap.webp',
+            imageUrl: '/medias/banners/mocap.webp',
             projectUrl: 'https://github.com/Julien-Carde/MVNX-to-blender',
             stack: ['Python']
         }
