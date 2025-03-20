@@ -74,7 +74,7 @@ export default function Glass() {
     };
 
     // Loading message with percentage
-    const loadingMessage = `Loading Model... ${loadingProgress}%`;
+    const loadingMessage = `Loading... ${loadingProgress}%`;
 
     return (
         <>
