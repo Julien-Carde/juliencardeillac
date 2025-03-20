@@ -27,7 +27,7 @@ export default function Projects() {
         },
         {
             title: '909 Drum Machine',
-            description: 'An online drum machine inspired by the legendary Roland TR-909, famous for shaping the sound of house and techno music',
+            description: 'An online drum machine inspired by the legendary Roland TR-909, famous for shaping the sound of house and techno music.',
             imageUrl: '/medias/banners/TR-909_banner.webp',
             projectUrl: 'https://909-online-drum-machine.vercel.app/',
             stack: ['React'],
