@@ -19,6 +19,13 @@ export default function Projects() {
 
     const webProjects = [
         {
+            title: 'Motion Lab',
+            description: 'A 3D Motion Visualizer designed for an academic project, enabling doctors to track patient movements during rehabilitation. This preview showcases the interface and example animations.',
+            imageUrl: '/medias/banners/MotionLab.webp',
+            projectUrl: 'https://motion-lab-teal.vercel.app/',
+            stack: ['React', 'Three.js'],
+        },
+        {
             title: 'Watchlist',
             description: 'A web app that allows you to create a watchlist and get information about the movies you want to watch. Powered by the TMDB API.',
             imageUrl: '/medias/banners/Watchlist_banner.webp',
@@ -31,13 +38,6 @@ export default function Projects() {
             imageUrl: '/medias/banners/TR-909_banner.webp',
             projectUrl: 'https://909-online-drum-machine.vercel.app/',
             stack: ['React'],
-        },
-        {
-            title: 'Motion Lab',
-            description: 'A 3D Motion Visualizer designed for an academic project, enabling doctors to track patient movements during rehabilitation. This preview showcases the interface and example animations.',
-            imageUrl: '/medias/banners/MotionLab.webp',
-            projectUrl: 'https://motion-lab-teal.vercel.app/',
-            stack: ['React', 'Three.js'],
         },
         {
             title: 'Space Invaders',
@@ -54,6 +54,12 @@ export default function Projects() {
             description: <>Introduction shot of my short-film <em>Airbag</em> (work in progress)</>,
             wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/vivien_wireframe.webm?alt=media&token=5a6baef7-f6ea-42ca-b645-34462fe505ac',
             renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/vivien.webm?alt=media&token=f82c05eb-853f-4aa5-b89d-42d34a6ba21e'
+        },
+        {
+            title: 'Bloom',
+            description: 'Rendered with Houdini Karma, procedural geometry, vellum simulation',
+            wireframeUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Flower_wireframe.webm?alt=media&token=36182e2c-4fdb-40ba-916d-3785b2359cab',
+            renderUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-5bb0f.firebasestorage.app/o/Flower_render.webm?alt=media&token=9602835c-ff32-477a-a313-0dfcaba609c5'
         },
         {
             title: 'Paris Underground',

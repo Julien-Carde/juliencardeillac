@@ -177,9 +177,9 @@ export default function Cv() {
                     </h3>
                     <div className={`${styles['section-content']} ${expandedSection === 'skills' ? styles.expanded : ''}`}>
                         <div className={styles.skillsDetails}>
-                            <p><strong>Full-stack</strong>: HTML, CSS, JavaScript, TypeScript, React, Node.js, MongoDB, SQL</p>
                             <p><strong>Programming</strong>: Python, C++</p>
-                            <p><strong>Visual Effects & 3D Animation</strong>: Blender, After Effects</p>
+                            <p><strong>Visual Effects & 3D Animation</strong>: Blender, Houdini, After Effects</p>
+                            <p><strong>Full-stack</strong>: HTML, CSS, JavaScript, TypeScript, React, Node.js, MongoDB, SQL</p>
                             <p><strong>CAD</strong>: Catia, 3D Experience</p>
                             <p><strong>Machine Learning</strong>: PyTorch</p>
                             <p><strong>Video Editing</strong>: Premiere Pro, DaVinci Resolve</p>

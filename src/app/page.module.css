@@ -607,6 +607,12 @@
     font-size: 30px;
 }
 
+@media (max-width: 768px) {
+  .categorySelector {   
+    gap: 10px;
+  }
+}
+
 .categorySelector span {
     cursor: pointer;
     font-weight: bold;
