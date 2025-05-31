@@ -125,7 +125,7 @@ description: {
                                 onLoadedData={handleVideoLoaded}
                                 style={styles.video}
                             >
-                                <source src={mobileRenderUrl} type="video/mp4" />
+                                <source src={renderUrl} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                             {/* touch overlay... */}
