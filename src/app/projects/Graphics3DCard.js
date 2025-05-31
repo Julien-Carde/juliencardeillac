@@ -90,8 +90,19 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             opacity: 0, zIndex: 4
         },
         info: { display: "flex", flexDirection: "column", gap: "0px" },
-        title: { textAlign: "center", marginTop: "10px", fontFamily: "'Rajdhani', sans-serif" },
-        description: { margin: "0 auto", textAlign: "center", fontFamily: "'Montserrat', sans-serif", fontSize: "10px", color: "gray", fontWeight: 300 }
+       title: {
+    textAlign: "center",
+    margin: "10px 0 2px 0", // top, right, bottom, left
+    fontFamily: "'Rajdhani', sans-serif"
+},
+description: {
+    margin: "0 auto",
+    textAlign: "center",
+    fontFamily: "'Montserrat', sans-serif",
+    fontSize: "10px",
+    color: "gray",
+    fontWeight: 300
+}
     };
 
     return (
