@@ -122,20 +122,68 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
 
                     {isMobile ? (
                         <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
-                            <img src={cover} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                            <div style={styles.playOverlay} onClick={() => setShowModal(true)}>
-                                ▶
+                            <img
+                                src={cover}
+                                alt="preview"
+                                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                            />
+
+                            {/* Modern play overlay */}
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    width: "60px",
+                                    height: "60px",
+                                    background: "rgba(255, 255, 255, 0.8)",
+                                    borderRadius: "50%",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    zIndex: 2,
+                                    cursor: "pointer",
+                                    backdropFilter: "blur(4px)"
+                                }}
+                                onClick={() => setShowModal(true)}
+                            >
+                                <div style={{
+                                    width: 0,
+                                    height: 0,
+                                    borderTop: "10px solid transparent",
+                                    borderBottom: "10px solid transparent",
+                                    borderLeft: "16px solid black",
+                                    marginLeft: "4px"
+                                }} />
                             </div>
 
+                            {/* Modal */}
                             {showModal && (
-                                <div style={styles.modalOverlay} onClick={() => setShowModal(false)}>
-                                    <video
-                                        src={mobileRenderUrl || renderUrl}
-                                        style={styles.modalVideo}
-                                        controls
-                                        autoPlay
-                                        playsInline
-                                    />
+                                <div
+                                    style={{
+                                        position: "fixed",
+                                        top: 0,
+                                        left: 0,
+                                        width: "100vw",
+                                        height: "100vh",
+                                        backgroundColor: "rgba(0, 0, 0, 0.9)",
+                                        zIndex: 999,
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}
+                                    onClick={() => setShowModal(false)}
+                                >
+                                    <div onClick={(e) => e.stopPropagation()}>
+                                        <video
+                                            src={mobileRenderUrl || renderUrl}
+                                            style={{ width: "100vw", height: "100vh", objectFit: "contain" }}
+                                            controls
+                                            autoPlay
+                                            playsInline
+                                        />
+                                    </div>
                                 </div>
                             )}
                         </div>
