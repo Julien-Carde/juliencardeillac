@@ -104,40 +104,21 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                     {/* Mobile version: only mobileRenderUrl */}
                     {isMobile ? (
                         <div style={styles.videoWrapper}>
-        <video
-            ref={mobileVideoRef}
-            muted
-            playsInline
-            controls={false}
-            preload="auto"
-            poster={cover}
-            onLoadedData={handleVideoLoaded}
-            style={styles.video}
-        >
-            <source src={mobileRenderUrl} type="video/mp4" />
-            Your browser does not support the video tag.
-        </video>
-
-        {/* Overlay to capture touch and trigger play */}
-        <div
-            onClick={() => {
-                mobileVideoRef.current?.play().catch(err => console.log("Play failed:", err));
-            }}
-            onTouchStart={() => {
-                mobileVideoRef.current?.play().catch(err => console.log("Play failed:", err));
-            }}
-            style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                zIndex: 10,
-                cursor: 'pointer',
-                background: 'transparent',
-            }}
-        ></div>
-    </div>
+                            <video
+                                ref={mobileVideoRef}
+                                muted
+                                playsInline
+                                controls={true}
+                                preload="auto"
+                                poster={cover}
+                                onLoadedData={handleVideoLoaded}
+                                style={styles.video}
+                            >
+                                <source src={mobileRenderUrl} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                            {/* touch overlay... */}
+                        </div>
                     ) : (
                         <>
                             {/* Desktop version: render + wireframe */}
