@@ -172,6 +172,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                             loop
                             muted
                             playsInline
+                            autoPlay
                             preload={isMobile ? "metadata" : "auto"}
                             style={styles.video}
                             onTimeUpdate={isMobile ? undefined : handleTimeUpdate}
