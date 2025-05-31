@@ -5,9 +5,9 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
     const [isVisible, setIsVisible] = useState(false);
     const [videosLoaded, setVideosLoaded] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const wireframeVideoRef = useRef(null);
     const renderVideoRef = useRef(null);
-    const mobileVideoRef = useRef(null);
     const containerRef = useRef(null);
 
     useEffect(() => {
@@ -27,13 +27,10 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
         if (!isVisible) {
             renderVideoRef.current?.pause();
             wireframeVideoRef.current?.pause();
-            mobileVideoRef.current?.pause();
             return;
         }
 
-        if (isMobile && videosLoaded >= 1) {
-            // mobileVideoRef.current?.play().catch(console.log);
-        } else if (!isMobile && videosLoaded >= 2) {
+        if (!isMobile && videosLoaded >= 2) {
             renderVideoRef.current?.play().catch(console.log);
             wireframeVideoRef.current?.play().catch(console.log);
         }
@@ -44,7 +41,6 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
     const handleSliderChange = (e) => setSliderPosition(Number(e.target.value));
 
     const handleTimeUpdate = (e) => {
-        if (isMobile) return;
         const source = e.target;
         const target = source === wireframeVideoRef.current ? renderVideoRef.current : wireframeVideoRef.current;
         if (Math.abs(source.currentTime - target.currentTime) > 0.2) {
@@ -60,7 +56,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
         },
         loaderContainer: {
             position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
-            display: (isMobile ? videosLoaded >= 1 : videosLoaded >= 2) ? "none" : "flex",
+            display: (!isMobile && videosLoaded < 2) ? "flex" : "none",
             alignItems: "center", justifyContent: "center", background: "#f0f0f0", zIndex: 5
         },
         loader: {
@@ -70,7 +66,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
         },
         videoWrapper: {
             position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
-            display: (isMobile ? videosLoaded >= 1 : videosLoaded >= 2) ? "block" : "none"
+            display: (!isMobile && videosLoaded >= 2) ? "block" : "none"
         },
         video: { width: "100%", height: "100%", objectFit: "cover" },
         sliderLine: {
@@ -90,49 +86,61 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             opacity: 0, zIndex: 4
         },
         info: { display: "flex", flexDirection: "column", gap: "0px" },
-       title: {
-    textAlign: "center",
-    margin: "10px 0 2px 0", // top, right, bottom, left
-    fontFamily: "'Rajdhani', sans-serif"
-},
-description: {
-    margin: "0 auto",
-    textAlign: "center",
-    fontFamily: "'Montserrat', sans-serif",
-    fontSize: "10px",
-    color: "gray",
-    fontWeight: 300
-}
+        title: {
+            textAlign: "center",
+            margin: "10px 0 2px 0",
+            fontFamily: "'Rajdhani', sans-serif"
+        },
+        description: {
+            margin: "0 auto",
+            textAlign: "center",
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: "10px",
+            color: "gray",
+            fontWeight: 300
+        },
+        modalOverlay: {
+            position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
+            background: "rgba(0, 0, 0, 0.9)", zIndex: 9999,
+            display: "flex", alignItems: "center", justifyContent: "center"
+        },
+        modalVideo: {
+            width: "100%", maxHeight: "100%", objectFit: "contain"
+        },
+        playOverlay: {
+            position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            background: "rgba(0, 0, 0, 0.3)", color: "white", fontSize: "30px", cursor: "pointer"
+        }
     };
 
     return (
         <div style={styles.graphicsCardWrapper}>
             <div style={styles.graphicsCard}>
                 <div ref={containerRef} style={styles.videoComparisonContainer}>
-                    {/* Loader */}
                     <div style={styles.loaderContainer}><div style={styles.loader}></div></div>
 
-                    {/* Mobile version: only mobileRenderUrl */}
                     {isMobile ? (
-                        <div style={styles.videoWrapper}>
-                            <video
-                                ref={mobileVideoRef}
-                                muted
-                                playsInline
-                                controls={true}
-                                preload="auto"
-                                poster={cover}
-                                onLoadedData={handleVideoLoaded}
-                                style={styles.video}
-                            >
-                                <source src={renderUrl} type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                            {/* touch overlay... */}
+                        <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
+                            <img src={cover} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            <div style={styles.playOverlay} onClick={() => setShowModal(true)}>
+                                ▶
+                            </div>
+
+                            {showModal && (
+                                <div style={styles.modalOverlay} onClick={() => setShowModal(false)}>
+                                    <video
+                                        src={mobileRenderUrl || renderUrl}
+                                        style={styles.modalVideo}
+                                        controls
+                                        autoPlay
+                                        playsInline
+                                    />
+                                </div>
+                            )}
                         </div>
                     ) : (
                         <>
-                            {/* Desktop version: render + wireframe */}
                             <div style={styles.videoWrapper}>
                                 <video
                                     ref={renderVideoRef}
@@ -143,7 +151,6 @@ description: {
                                     style={styles.video}
                                     onTimeUpdate={handleTimeUpdate}
                                     onLoadedData={handleVideoLoaded}
-                                    poster=""
                                 >
                                     <source src={renderUrl.replace(".webm", ".mp4")} type="video/mp4" />
                                     <source src={renderUrl} type="video/webm" />
@@ -165,7 +172,6 @@ description: {
                                     style={styles.video}
                                     onTimeUpdate={handleTimeUpdate}
                                     onLoadedData={handleVideoLoaded}
-                                    poster=""
                                 >
                                     <source src={wireframeUrl.replace(".webm", ".mp4")} type="video/mp4" />
                                     <source src={wireframeUrl} type="video/webm" />
