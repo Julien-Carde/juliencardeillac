@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function Graphics3DCard({ title, description, wireframeUrl, renderUrl, mobileRenderUrl }) {
+export default function Graphics3DCard({ title, description, wireframeUrl, renderUrl, mobileRenderUrl, cover }) {
     const [sliderPosition, setSliderPosition] = useState(50);
     const [isVisible, setIsVisible] = useState(false);
     const [videosLoaded, setVideosLoaded] = useState(0);
@@ -32,7 +32,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
         }
 
         if (isMobile && videosLoaded >= 1) {
-            mobileVideoRef.current?.play().catch(console.log);
+            // mobileVideoRef.current?.play().catch(console.log);
         } else if (!isMobile && videosLoaded >= 2) {
             renderVideoRef.current?.play().catch(console.log);
             wireframeVideoRef.current?.play().catch(console.log);
@@ -104,25 +104,40 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                     {/* Mobile version: only mobileRenderUrl */}
                     {isMobile ? (
                         <div style={styles.videoWrapper}>
-                            <video
-                                ref={mobileVideoRef}
-                                loop
-                                muted
-                                playsInline
-                                preload="auto"
-                                style={styles.video}
-                                onLoadedData={handleVideoLoaded}
-                                poster=""
-                            >
-                                {mobileRenderUrl && (
-                                    <>
-                                        <source src={mobileRenderUrl.replace(".webm", ".mp4")} type="video/mp4" />
-                                        <source src={mobileRenderUrl} type="video/webm" />
-                                    </>
-                                )}
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
+        <video
+            ref={mobileVideoRef}
+            muted
+            playsInline
+            controls={false}
+            preload="auto"
+            poster={cover}
+            onLoadedData={handleVideoLoaded}
+            style={styles.video}
+        >
+            <source src={mobileRenderUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        {/* Overlay to capture touch and trigger play */}
+        <div
+            onClick={() => {
+                mobileVideoRef.current?.play().catch(err => console.log("Play failed:", err));
+            }}
+            onTouchStart={() => {
+                mobileVideoRef.current?.play().catch(err => console.log("Play failed:", err));
+            }}
+            style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                zIndex: 10,
+                cursor: 'pointer',
+                background: 'transparent',
+            }}
+        ></div>
+    </div>
                     ) : (
                         <>
                             {/* Desktop version: render + wireframe */}
