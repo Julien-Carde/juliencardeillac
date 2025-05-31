@@ -212,7 +212,7 @@ export default function Cv() {
                         />
                     </h3>
                     <div className={`${styles['section-content']} ${expandedSection === 'interests' ? styles.expanded : ''}`}>
-                        <p>3D Animation, Filmmaking, Music Production, Climate Science</p>
+                        <p>3D Animation, Filmmaking, Music Production, Philosophy</p>
                     </div>
                 </section>
 

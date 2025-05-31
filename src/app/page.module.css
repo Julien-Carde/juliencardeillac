@@ -609,6 +609,8 @@
 
 @media (max-width: 768px) {
   .categorySelector {   
+    display: flex;
+    flex-direction: column;
     gap: 10px;
   }
 }
@@ -819,6 +821,12 @@
     flex-direction: column;
     width: 100%;
     padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .containerFilm {
+        width: auto;
+    }
 }
 
 .videoContainer {

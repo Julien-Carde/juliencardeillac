@@ -11,7 +11,8 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
 
     // Check if mobile on component mount
     useEffect(() => {
-        setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+        const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        setIsMobile(isMobileDevice);
     }, []);
 
     // Set up intersection observer for lazy loading
@@ -19,7 +20,6 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
-                console.log("Component is visible:", entry.isIntersecting); // Debugging
             },
             { threshold: 0.1 }
         );
@@ -33,19 +33,22 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
 
     // Handle video playback based on visibility
     useEffect(() => {
-        if (isVisible && videosLoaded >= 2) {
-            // Both videos are loaded and component is visible
-            wireframeVideoRef.current?.play().catch(e => console.log("Play error:", e));
+        if (isVisible && videosLoaded >= (isMobile ? 1 : 2)) {
+            // On mobile, we only need the render video loaded
             renderVideoRef.current?.play().catch(e => console.log("Play error:", e));
+            if (!isMobile) {
+                wireframeVideoRef.current?.play().catch(e => console.log("Play error:", e));
+            }
         } else {
-            wireframeVideoRef.current?.pause();
             renderVideoRef.current?.pause();
+            if (!isMobile) {
+                wireframeVideoRef.current?.pause();
+            }
         }
-    }, [isVisible, videosLoaded]);
+    }, [isVisible, videosLoaded, isMobile]);
 
     const handleVideoLoaded = () => {
         setVideosLoaded(prev => prev + 1);
-        console.log("Video loaded, total loaded:", videosLoaded + 1); // Debugging
     };
 
     const handleSliderChange = (e) => {
@@ -53,6 +56,8 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
     };
 
     const handleTimeUpdate = (event) => {
+        if (isMobile) return;
+        
         // Keep videos in sync but only update when necessary
         if (wireframeVideoRef.current && renderVideoRef.current) {
             const sourceVideo = event.target;
@@ -74,7 +79,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             width: "100%", 
             paddingTop: "56.25%", 
             overflow: "hidden",
-            background: "#f0f0f0" // Placeholder background while loading
+            background: "#f0f0f0"
         },
         loaderContainer: {
             position: "absolute",
@@ -82,7 +87,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             left: 0,
             width: "100%",
             height: "100%",
-            display: videosLoaded >= 2 ? "none" : "flex",
+            display: (isMobile ? videosLoaded >= 1 : videosLoaded >= 2) ? "none" : "flex",
             alignItems: "center",
             justifyContent: "center",
             background: "#f0f0f0",
@@ -102,7 +107,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             left: 0, 
             width: "100%", 
             height: "100%",
-            display: videosLoaded >= 2 ? "block" : "none" // Hide until loaded
+            display: (isMobile ? videosLoaded >= 1 : videosLoaded >= 2) ? "block" : "none"
         },
         video: { 
             width: "100%", 
@@ -118,7 +123,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             left: `${sliderPosition}%`, 
             cursor: "ew-resize", 
             zIndex: 2,
-            display: videosLoaded >= 2 ? "block" : "none" // Hide until loaded
+            display: (isMobile || videosLoaded < 2) ? "none" : "block"
         },
         sliderHandle: { 
             position: "absolute", 
@@ -126,7 +131,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             transform: "translate(-50%, -50%)", 
             width: "40px", 
             height: "40px", 
-            display: videosLoaded >= 2 ? "flex" : "none", // Hide until loaded
+            display: (isMobile || videosLoaded < 2) ? "none" : "flex",
             alignItems: "center", 
             justifyContent: "space-between", 
             background: "white", 
@@ -144,7 +149,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
             height: "100%", 
             opacity: 0, 
             zIndex: 4,
-            display: videosLoaded >= 2 ? "block" : "none" // Hide until loaded
+            display: (isMobile || videosLoaded < 2) ? "none" : "block"
         },
         info: { display: "flex", flexDirection: "column", gap: "0px" },
         title: { textAlign: "center", marginTop: "10px", marginBottom: "0px", fontFamily: "'Rajdhani', sans-serif" },
@@ -160,7 +165,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                         <div style={styles.loader}></div>
                     </div>
                     
-                    {/* Render Video (Left Side) */}
+                    {/* Render Video (Always shown) */}
                     <div style={styles.videoWrapper}>
                         <video
                             ref={renderVideoRef}
@@ -169,9 +174,9 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                             playsInline
                             preload={isMobile ? "metadata" : "auto"}
                             style={styles.video}
-                            onTimeUpdate={handleTimeUpdate}
+                            onTimeUpdate={isMobile ? undefined : handleTimeUpdate}
                             onLoadedData={handleVideoLoaded}
-                            poster="" // Add a low-res poster image URL here for faster initial render
+                            poster=""
                         >
                             <source src={renderUrl} type="video/webm" />
                             <source src={renderUrl.replace(".webm", ".mp4")} type="video/mp4" />
@@ -179,49 +184,51 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                         </video>
                     </div>
                     
-                    {/* Wireframe Video (Right Side) */}
-                    <div 
-                        style={{
-                            ...styles.videoWrapper,
-                            maskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`,
-                            WebkitMaskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`
-                        }}
-                    >
-                        <video
-                            ref={wireframeVideoRef}
-                            loop
-                            muted
-                            playsInline
-                            preload={isMobile ? "metadata" : "auto"}
-                            style={styles.video}
-                            onTimeUpdate={handleTimeUpdate}
-                            onLoadedData={handleVideoLoaded}
-                            poster="" // Add a low-res poster image URL here for faster initial render
+                    {/* Wireframe Video (Only shown on desktop) */}
+                    {!isMobile && (
+                        <div 
+                            style={{
+                                ...styles.videoWrapper,
+                                maskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`,
+                                WebkitMaskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`
+                            }}
                         >
-                            <source src={wireframeUrl} type="video/webm" />
-                            <source src={wireframeUrl.replace(".webm", ".mp4")} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
+                            <video
+                                ref={wireframeVideoRef}
+                                loop
+                                muted
+                                playsInline
+                                preload="auto"
+                                style={styles.video}
+                                onTimeUpdate={handleTimeUpdate}
+                                onLoadedData={handleVideoLoaded}
+                                poster=""
+                            >
+                                <source src={wireframeUrl} type="video/webm" />
+                                <source src={wireframeUrl.replace(".webm", ".mp4")} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    )}
                     
-                    {/* Vertical Slider Line */}
-                    <div style={styles.sliderLine}></div>
-                    
-                    {/* Draggable Slider Handle with Arrows */}
-                    <div style={styles.sliderHandle}>
-                        <span style={styles.arrow}>&lt;</span>
-                        <span style={styles.arrow}>&gt;</span>
-                    </div>
-                    
-                    {/* Hidden Range Slider */}
-                    <input 
-                        type="range" 
-                        min="0" 
-                        max="100" 
-                        value={sliderPosition} 
-                        onChange={handleSliderChange} 
-                        style={styles.slider} 
-                    />
+                    {/* Slider elements (Only shown on desktop) */}
+                    {!isMobile && (
+                        <>
+                            <div style={styles.sliderLine}></div>
+                            <div style={styles.sliderHandle}>
+                                <span style={styles.arrow}>&lt;</span>
+                                <span style={styles.arrow}>&gt;</span>
+                            </div>
+                            <input 
+                                type="range" 
+                                min="0" 
+                                max="100" 
+                                value={sliderPosition} 
+                                onChange={handleSliderChange} 
+                                style={styles.slider} 
+                            />
+                        </>
+                    )}
                 </div>
                 <div style={styles.info}>
                     <h3 style={styles.title}>{title}</h3>
@@ -229,7 +236,6 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                 </div>
             </div>
             
-            {/* Animation keyframes for loader */}
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @keyframes spin {
