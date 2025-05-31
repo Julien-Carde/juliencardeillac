@@ -160,7 +160,7 @@ export default function Graphics3DCard({
             </div>
             <video
               ref={mobileVideoRef}
-              src={mobileRenderUrl || renderUrl}
+              src={mobileRenderUrl}
               style={{ display: "none" }}
               controls
               playsInline
