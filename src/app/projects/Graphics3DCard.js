@@ -109,7 +109,7 @@ export default function Graphics3DCard({ title, description, wireframeUrl, rende
                                 loop
                                 muted
                                 playsInline
-                                preload="metadata"
+                                preload="auto"
                                 style={styles.video}
                                 onLoadedData={handleVideoLoaded}
                                 poster=""
