@@ -35,8 +35,17 @@ export default function About() {
                         Hello! I am Julien Cardeillac, a 23-year-old engineer with a passion for 3D graphics, filmmaking and creative innovation.
                         My engineering background, combined with a keen interest in artistic expression, drives me to work on projects that blend technical precision with aesthetic impact.
                         <br />
-                        <p className={styles.optionalText}>Whether working on CGI, flimmaking or scientific research, I am dedicated to continually building my skills, learning from experienced teams, and contributing to innovative projects that merge technology with art.
-                        Welcome to my portfolio, where I share my journey through code, creativity, and continuous learning. <span style={{ fontFamily: 'Courier New, Courier, monospace', display: 'inline-flex', alignItems: 'center' }}>(Made with <img src="/medias/nextjs.svg" alt="Next.js Logo" className={styles.logoStack} style={{ margin: '0 5px' }} /> Next.js and <img src="/medias/Three.js_Icon.svg.png" alt="Three.js Logo" className={styles.logoStack} style={{ margin: '0 5px' }} /> Three.js)</span>
+                        <p className={styles.optionalText}>
+                            Starting in September, I will begin a two-year master’s program in{" "}
+                            <a
+                                href="https://programmes.polytechnique.edu/en/master/all-msct-programs/science-technology-in-extended-cinematography"
+                                style={{ color: "#555", textDecoration: "underline"}}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Extended Cinematography
+                            </a>{" "}
+                            (École Polytechnique & Louis Lumière), focused on VFX, virtual production, and computer graphics. As part of this program, I am currently looking for an apprenticeship (alternance) over the next two years, ideally within a VFX studio or virtual production environment, either as an R&D engineer or working on set.
                         </p>
                     </p>
                 </div>

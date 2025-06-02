@@ -1,231 +1,243 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function Graphics3DCard({
-  title,
-  description,
-  wireframeUrl,
-  renderUrl,
-  mobileRenderUrl,
-  cover
-}) {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const [isMobile, setIsMobile] = useState(false);
-  const [videosLoaded, setVideosLoaded] = useState(0);
-  const wireframeRef = useRef(null);
-  const renderRef = useRef(null);
-  const mobileVideoRef = useRef(null);
+export default function Graphics3DCard({ title, description, wireframeUrl, renderUrl }) {
+    const [sliderPosition, setSliderPosition] = useState(50);
+    const [isVisible, setIsVisible] = useState(false);
+    const [videosLoaded, setVideosLoaded] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+    const wireframeVideoRef = useRef(null);
+    const renderVideoRef = useRef(null);
+    const containerRef = useRef(null);
 
-  useEffect(() => {
-    setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
-  }, []);
+    // Check if mobile on component mount
+    useEffect(() => {
+        setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+    }, []);
 
-  const handleSliderChange = (e) => {
-    setSliderPosition(Number(e.target.value));
-  };
+    // Set up intersection observer for lazy loading
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+                console.log("Component is visible:", entry.isIntersecting); // Debugging
+            },
+            { threshold: 0.1 }
+        );
 
-  const handleVideoLoaded = () => setVideosLoaded((prev) => prev + 1);
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
 
-  const handleTimeUpdate = (e) => {
-    const source = e.target;
-    const target =
-      source === wireframeRef.current ? renderRef.current : wireframeRef.current;
-    if (Math.abs(source.currentTime - target.currentTime) > 0.2) {
-      target.currentTime = source.currentTime;
-    }
-  };
+        return () => observer.disconnect();
+    }, []);
 
-  const requestFullscreenPlay = () => {
-    const video = mobileVideoRef.current;
-    if (video) {
-      video.play().catch(console.error);
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitEnterFullscreen) {
-        video.webkitEnterFullscreen(); // iOS Safari
-      }
-    }
-  };
+    // Handle video playback based on visibility
+    useEffect(() => {
+        if (isVisible && videosLoaded >= 2) {
+            // Both videos are loaded and component is visible
+            wireframeVideoRef.current?.play().catch(e => console.log("Play error:", e));
+            renderVideoRef.current?.play().catch(e => console.log("Play error:", e));
+        } else {
+            wireframeVideoRef.current?.pause();
+            renderVideoRef.current?.pause();
+        }
+    }, [isVisible, videosLoaded]);
 
-  const styles = {
-    container: { width: "100%", maxWidth: "800px", margin: "0 auto" },
-    videoContainer: {
-      position: "relative",
-      width: "100%",
-      paddingTop: "56.25%", // 16:9 aspect ratio
-      background: "#f0f0f0",
-      overflow: "hidden"
-    },
-    videoWrapper: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      objectFit: "cover"
-    },
-    sliderLine: {
-      position: "absolute",
-      top: 0,
-      bottom: 0,
-      width: "1px",
-      background: "white",
-      left: `${sliderPosition}%`,
-      zIndex: 2
-    },
-    sliderHandle: {
-      position: "absolute",
-      top: "50%",
-      left: `${sliderPosition}%`,
-      transform: "translate(-50%, -50%)",
-      width: "40px",
-      height: "40px",
-      background: "white",
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      zIndex: 3
-    },
-    arrow: {
-      pointerEvents: "none",
-      userSelect: "none",
-      color: "gray",
-      margin: "0 5px"
-    },
-    slider: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      opacity: 0,
-      zIndex: 4
-    },
-    info: {
-      display: "flex",
-      flexDirection: "column",
-      gap: "0px"
-    },
-    title: {
-      textAlign: "center",
-      margin: "10px 0 2px 0",
-      fontFamily: "'Rajdhani', sans-serif"
-    },
-    description: {
-      margin: "0 auto",
-      textAlign: "center",
-      fontFamily: "'Montserrat', sans-serif",
-      fontSize: "10px",
-      color: "gray",
-      fontWeight: 300
-    },
-    playButton: {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: "60px",
-      height: "60px",
-      background: "rgba(255, 255, 255, 0.8)",
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: 2,
-      cursor: "pointer",
-      backdropFilter: "blur(4px)"
-    },
-    triangle: {
-      width: 0,
-      height: 0,
-      borderTop: "10px solid transparent",
-      borderBottom: "10px solid transparent",
-      borderLeft: "16px solid black",
-      marginLeft: "4px"
-    }
-  };
+    const handleVideoLoaded = () => {
+        setVideosLoaded(prev => prev + 1);
+        console.log("Video loaded, total loaded:", videosLoaded + 1); // Debugging
+    };
 
-  return (
-    <div style={styles.container}>
-      <div style={styles.videoContainer}>
-        {isMobile ? (
-          <>
-            <img
-              src={cover}
-              alt="preview"
-              style={styles.videoWrapper}
-            />
-            <div style={styles.playButton} onClick={requestFullscreenPlay}>
-              <div style={styles.triangle}></div>
+    const handleSliderChange = (e) => {
+        setSliderPosition(Number(e.target.value));
+    };
+
+    const handleTimeUpdate = (event) => {
+        // Keep videos in sync but only update when necessary
+        if (wireframeVideoRef.current && renderVideoRef.current) {
+            const sourceVideo = event.target;
+            const targetVideo = sourceVideo === wireframeVideoRef.current 
+                ? renderVideoRef.current 
+                : wireframeVideoRef.current;
+                
+            if (Math.abs(sourceVideo.currentTime - targetVideo.currentTime) > 0.2) {
+                targetVideo.currentTime = sourceVideo.currentTime;
+            }
+        }
+    };
+
+    const styles = {
+        graphicsCardWrapper: { width: "100%", margin: "0 auto" },
+        graphicsCard: { position: "relative", width: "100%", maxWidth: "800px", margin: "0 auto" },
+        videoComparisonContainer: { 
+            position: "relative", 
+            width: "100%", 
+            paddingTop: "56.25%", 
+            overflow: "hidden",
+            background: "#f0f0f0" // Placeholder background while loading
+        },
+        loaderContainer: {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: videosLoaded >= 2 ? "none" : "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#f0f0f0",
+            zIndex: 5
+        },
+        loader: {
+            width: "40px",
+            height: "40px",
+            border: "5px solid #ffffff",
+            borderRadius: "50%",
+            borderTop: "5px solid #888888",
+            animation: "spin 1s linear infinite"
+        },
+        videoWrapper: { 
+            position: "absolute", 
+            top: 0, 
+            left: 0, 
+            width: "100%", 
+            height: "100%",
+            display: videosLoaded >= 2 ? "block" : "none" // Hide until loaded
+        },
+        video: { 
+            width: "100%", 
+            height: "100%", 
+            objectFit: "cover" 
+        },
+        sliderLine: { 
+            position: "absolute", 
+            top: 0, 
+            bottom: 0, 
+            width: "1px", 
+            background: "white", 
+            left: `${sliderPosition}%`, 
+            cursor: "ew-resize", 
+            zIndex: 2,
+            display: videosLoaded >= 2 ? "block" : "none" // Hide until loaded
+        },
+        sliderHandle: { 
+            position: "absolute", 
+            top: "50%", 
+            transform: "translate(-50%, -50%)", 
+            width: "40px", 
+            height: "40px", 
+            display: videosLoaded >= 2 ? "flex" : "none", // Hide until loaded
+            alignItems: "center", 
+            justifyContent: "space-between", 
+            background: "white", 
+            borderRadius: "50%", 
+            cursor: "ew-resize", 
+            zIndex: 3, 
+            left: `${sliderPosition}%` 
+        },
+        arrow: { pointerEvents: "none", userSelect: "none", color: "gray", margin: "0 5px" },
+        slider: { 
+            position: "absolute", 
+            top: 0, 
+            left: 0, 
+            width: "100%", 
+            height: "100%", 
+            opacity: 0, 
+            zIndex: 4,
+            display: videosLoaded >= 2 ? "block" : "none" // Hide until loaded
+        },
+        info: { display: "flex", flexDirection: "column", gap: "0px" },
+        title: { textAlign: "center", marginTop: "10px", marginBottom: "0px", fontFamily: "'Rajdhani', sans-serif" },
+        description: { marginTop: "0px", textAlign: "center", fontFamily: "'Montserrat', sans-serif", fontSize: "10px", color: "gray", fontWeight: 300 },
+    };
+
+    return (
+        <div style={styles.graphicsCardWrapper}>
+            <div style={styles.graphicsCard}>
+                <div ref={containerRef} style={styles.videoComparisonContainer}>
+                    {/* Loading Indicator */}
+                    <div style={styles.loaderContainer}>
+                        <div style={styles.loader}></div>
+                    </div>
+                    
+                    {/* Render Video (Left Side) */}
+                    <div style={styles.videoWrapper}>
+                        <video
+                            ref={renderVideoRef}
+                            loop
+                            muted
+                            playsInline
+                            preload={isMobile ? "metadata" : "auto"}
+                            style={styles.video}
+                            onTimeUpdate={handleTimeUpdate}
+                            onLoadedData={handleVideoLoaded}
+                            poster="" // Add a low-res poster image URL here for faster initial render
+                        >
+                            <source src={renderUrl} type="video/webm" />
+                            <source src={renderUrl.replace(".webm", ".mp4")} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    {/* Wireframe Video (Right Side) */}
+                    <div 
+                        style={{
+                            ...styles.videoWrapper,
+                            maskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`,
+                            WebkitMaskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`
+                        }}
+                    >
+                        <video
+                            ref={wireframeVideoRef}
+                            loop
+                            muted
+                            playsInline
+                            preload={isMobile ? "metadata" : "auto"}
+                            style={styles.video}
+                            onTimeUpdate={handleTimeUpdate}
+                            onLoadedData={handleVideoLoaded}
+                            poster="" // Add a low-res poster image URL here for faster initial render
+                        >
+                            <source src={wireframeUrl} type="video/webm" />
+                            <source src={wireframeUrl.replace(".webm", ".mp4")} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    {/* Vertical Slider Line */}
+                    <div style={styles.sliderLine}></div>
+                    
+                    {/* Draggable Slider Handle with Arrows */}
+                    <div style={styles.sliderHandle}>
+                        <span style={styles.arrow}>&lt;</span>
+                        <span style={styles.arrow}>&gt;</span>
+                    </div>
+                    
+                    {/* Hidden Range Slider */}
+                    <input 
+                        type="range" 
+                        min="0" 
+                        max="100" 
+                        value={sliderPosition} 
+                        onChange={handleSliderChange} 
+                        style={styles.slider} 
+                    />
+                </div>
+                <div style={styles.info}>
+                    <h3 style={styles.title}>{title}</h3>
+                    <p style={styles.description}>{description}</p>
+                </div>
             </div>
-            <video
-              ref={mobileVideoRef}
-              src={mobileRenderUrl}
-              style={{ display: "none" }}
-              controls
-              playsInline
-              preload="auto"
-            />
-          </>
-        ) : (
-          <>
-            <video
-              ref={renderRef}
-              loop
-              muted
-              playsInline
-              preload="auto"
-              style={styles.videoWrapper}
-              onLoadedData={handleVideoLoaded}
-              onTimeUpdate={handleTimeUpdate}
-            >
-              <source src={renderUrl.replace(".webm", ".mp4")} type="video/mp4" />
-              <source src={renderUrl} type="video/webm" />
-            </video>
-
-            <div
-              style={{
-                ...styles.videoWrapper,
-                maskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`,
-                WebkitMaskImage: `linear-gradient(to right, transparent ${sliderPosition}%, black ${sliderPosition}%)`
-              }}
-            >
-              <video
-                ref={wireframeRef}
-                loop
-                muted
-                playsInline
-                preload="auto"
-                style={styles.videoWrapper}
-                onLoadedData={handleVideoLoaded}
-                onTimeUpdate={handleTimeUpdate}
-              >
-                <source src={wireframeUrl.replace(".webm", ".mp4")} type="video/mp4" />
-                <source src={wireframeUrl} type="video/webm" />
-              </video>
-            </div>
-
-            <div style={styles.sliderLine}></div>
-            <div style={styles.sliderHandle}>
-              <span style={styles.arrow}>&lt;</span>
-              <span style={styles.arrow}>&gt;</span>
-            </div>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={sliderPosition}
-              onChange={handleSliderChange}
-              style={styles.slider}
-            />
-          </>
-        )}
-      </div>
-
-      <div style={styles.info}>
-        <h3 style={styles.title}>{title}</h3>
-        <p style={styles.description}>{description}</p>
-      </div>
-    </div>
-  );
+            
+            {/* Animation keyframes for loader */}
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                `
+            }} />
+        </div>
+    );
 }
